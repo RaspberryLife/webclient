@@ -1,0 +1,121 @@
+// =============================================================================
+// Optional parameters for java compilation
+// =============================================================================
+option java_package = "protobuf";
+option java_outer_classname = "RBHproto";
+
+// =============================================================================
+// General RBHMessage
+// =============================================================================
+message RBHMessage {
+	required string id = 1;
+    required MessageType mType = 2 [default = PLAIN_TEXT];
+
+    optional PlainText plainText = 3;
+	optional RegisterInstructionObserver registerInstructionObserver = 4;
+	optional RunInstruction runInstruction = 5;
+	optional RegisterDataField registerDataField = 6;
+	optional UpdateDataField updateDataField = 7;
+	optional DataSet dataSet = 8;
+	optional GetDataSet getDataSet = 9;
+
+
+    enum MessageType {
+        PLAIN_TEXT = 0;
+        REGISTER_INSTRUCTION_OBSERVER = 1;
+        RUN_INSTRUCTION = 2;
+	    REGISTER_DATA_FIELD = 3;
+	    UPDATE_DATA_FIELD = 4;
+	    GET_DATA_SET = 5;
+	    DATA_SET = 6;
+
+	    // All Auth-Types use PlainText as message content
+        AUTH_REQUEST = 7;
+        AUTH_DENIED = 8;
+        AUTH_ACCEPT = 9;
+    }
+// =============================================================================
+// General
+// =============================================================================
+
+    // Plaintext subtype for general purpose
+    message PlainText {
+        required string text = 1;
+    }
+
+// =============================================================================
+// Instruction subtypes
+// =============================================================================
+    message Instruction {
+
+        // Name of the instruction
+	    required string instructionID = 1;
+	    repeated string stringParameters = 2;
+	    repeated int32 intParameters = 3;
+    }
+
+    message RegisterInstructionObserver {
+        required string moduleID = 1;
+        required Instruction instruction = 2;
+    }
+
+    message RunInstruction {
+	    required string targetID = 1;
+	    required Instruction instruction = 2;
+    }
+
+// =============================================================================
+// Data subtypes
+// =============================================================================
+
+    //This defines the DataType that is used
+    enum DataType {
+	    INTEGER = 0;
+	    FLOAT = 1;
+	    STRING = 2;
+    }
+
+    message Data {
+	    required DataType dType = 1;
+	    //specify date as follows: "YYYY-MM-DD hh:mm:ss"
+	    optional string dateTime = 2;
+	    optional string stringData = 3;
+	    optional int32 int32Data = 4;
+	    optional float floatData = 5;
+    }
+
+    // Initial message to register a data field
+    // See UpdateDataField on how to update data
+    message RegisterDataField {
+	    required string fieldName = 1;
+	    required DataType dType = 2;
+    }
+
+    // Always update with the same DataType
+    // Using a diffrent dataType will result in the server not reading it
+    message UpdateDataField {
+	    required string fieldName = 1;
+	    required Data data = 2;
+    }
+
+    message GetDataSet {
+	    required string modulID = 1;
+	    required string fieldID = 2;
+
+	    //leaving this empty will result in a fixed number of results e.g. 50
+	    optional int32 count = 3;
+
+	    //specify date as follows: "YYYY-MM-DD hh:mm:ss"
+	    optional string startDateTime = 4;
+
+	    // same as startDateTime
+	    optional string endDateTime = 5;
+    }
+
+    message DataSet {
+	    required string modulID = 1;
+	    required string fieldID = 2;
+	    repeated Data data = 3;
+    }
+
+} // close RBHMessage
