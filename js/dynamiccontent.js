@@ -1,12 +1,9 @@
 $(function() {
 
     if(Modernizr.history){
-
-    var newHash      = "",
+        var newHash      = "",
         $mainContent = $("#main-content"),
-        baseHeight   = 600,
         $el;
-
 
     $("nav").delegate("a", "click", function() {
         _link = $(this).attr("href");
@@ -21,7 +18,6 @@ $(function() {
                 .fadeOut(200, function() {
                     $mainContent.hide().load(href + " #guts", function() {
                         $mainContent.fadeIn(200, function() {
-
                         });
                         $("nav li").removeClass("active");
                         console.log(href);
@@ -31,11 +27,8 @@ $(function() {
     }
 
     $(window).bind('popstate', function(){
-       _link = location.pathname.replace(/^.*[\\\/]/, ''); //get filename only
+       _link = location.pathname.replace(/^.*[\\\/]/, '');
        loadContent(_link);
     });
-
-} // otherwise, history is not supported, so nothing fancy here.
-
-
+}
 });
