@@ -1,3 +1,10 @@
+ if (typeof dcodeIO === 'undefined' || !dcodeIO.ProtoBuf) {
+            throw (new Error("ProtoBuf.js is not present."));
+        }
+         // Initialize ProtoBuf.js
+        var ProtoBuf = dcodeIO.ProtoBuf;
+        var RBHMessage = ProtoBuf.loadProtoFile("./raspberryhome.proto").build("RBHMessage");
+
     var id = document.getElementById("id");
     var mType = document.getElementById("mType");
     var plainText = document.getElementById("plainText");

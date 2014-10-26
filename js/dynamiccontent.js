@@ -20,10 +20,15 @@ $(function() {
                         $mainContent.fadeIn(200, function() {
                         });
                         $("nav li").removeClass("active");
-                        console.log(href);
+                        console.log(href+" loaded");
                         $("nav a[href$='"+href+"']").parent().addClass("active");
                     });
                 });
+
+                if(href=="debug.html"){
+                  console.log("yeah!");
+                  getScript("js/debug.js");
+                }
     }
 
     $(window).bind('popstate', function(){
