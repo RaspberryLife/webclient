@@ -8,7 +8,7 @@ $(function() {
         $el;
 
 
-    $("div").delegate("a", "click", function() {
+    $("nav").delegate("a", "click", function() {
         _link = $(this).attr("href");
         history.pushState(null, null, _link);
         loadContent(_link);
@@ -23,9 +23,9 @@ $(function() {
                         $mainContent.fadeIn(200, function() {
 
                         });
-                        $("nav a").removeClass("current");
+                        $("nav li").removeClass("active");
                         console.log(href);
-                        $("nav a[href$="+href+"]").addClass("current");
+                        $("nav a[href$='"+href+"']").parent().addClass("active");
                     });
                 });
     }
