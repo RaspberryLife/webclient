@@ -1,15 +1,16 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-    <title>RaspberryLife</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
+  <title>RaspberryLife</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
 
-    <!-- Stylesheet imports -->
-    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/ripples.min.css" rel="stylesheet">
-    <link href="css/material-wfont.min.css" rel="stylesheet">
-    <link href="css/custom.css" rel="stylesheet">
+  <!-- Stylesheet imports -->
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/ripples.min.css" rel="stylesheet">
+  <link href="css/material-wfont.min.css" rel="stylesheet">
+  <link href="css/custom.css" rel="stylesheet">
 
 
 </head>
@@ -17,44 +18,44 @@
 <body>
 
 
-<div class="navbar navbar-default">
+  <div class="navbar navbar-default">
     <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="index.html">RaspberryLife</a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">RaspberryLife</a>
     </div>
     <div class="navbar-collapse collapse navbar-responsive-collapse">
-        <ul class="nav navbar-nav">
-            <li><a href="index.html">Overview</a></li>
-            <li class="active"><a href="debug.html">Debug</a></li>
-            <li><a href="#">Link2</a></li>
-        </ul>
-        <form class="navbar-form navbar-right">
-            <input type="text" class="form-control col-lg-8" placeholder="Search">
-        </form>
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">Overview</a></li>
+        <li class="active"><a href="debug.html">Debug</a></li>
+        <li><a href="#">Link2</a></li>
+      </ul>
+      <form class="navbar-form navbar-right">
+        <input type="text" class="form-control col-lg-8" placeholder="Search">
+      </form>
     </div>
-</div>
-<section id="main-content">
+  </div>
+  <section id="main-content">
 
-      <div class="container" id="guts">
-                <h1>Debugging console</h1>
+    <div class="container" id="guts">
+      <h1>Debugging console</h1>
 
-                <br>
-                <br>
-                <textarea id="log"></textarea>
-                <br />
-                <input type="plainText" id="plainText" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" value="enter protobuf plaintext" />
-                <button onclick="send()">Send protobuf message</button>
-                <button onclick="sendGetDataMessage()">Get data set</button>
-                <button onclick="sendAuthRequestMessage()">Send auth request</button>
-                <button onclick="getModulID()">Get modul ID</button>
+      <br>
+      <br>
+      <textarea id="log"></textarea>
+      <br />
+      <input type="plainText" id="plainText" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" value="enter protobuf plaintext" />
+      <button onclick="send()">Send protobuf message</button>
+      <button onclick="sendGetDataMessage()">Get data set</button>
+      <button onclick="sendAuthRequestMessage()">Send auth request</button>
+      <button onclick="getModulID()">Get modul ID</button>
 
-            </div>
+    </div>
 
-<!-- Script imports -->
+    <!-- Script imports -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="js/modernizr.js"></script>
@@ -65,7 +66,7 @@
     <script src="js/ByteBufferAB.min.js"></script>
     <script src="js/ProtoBuf.min.js"></script>
     <script src="js/debug.js"></script>
-</section>
+  </section>
 
   <div class="footer">
     <div class="container">
