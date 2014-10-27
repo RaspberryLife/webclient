@@ -3,7 +3,7 @@
         }
          // Initialize ProtoBuf.js
         var ProtoBuf = dcodeIO.ProtoBuf;
-        var RBHMessage = ProtoBuf.loadProtoFile("./raspberryhome.proto").build("RBHMessage");
+        var RBHMessage = ProtoBuf.loadProtoFile("raspberryhome.proto").build("RBHMessage");
 
     var id = document.getElementById("id");
     var mType = document.getElementById("mType");
@@ -47,7 +47,7 @@
         } catch (err) {
             log.value += "> Error: " + err + "\n";
         }
-    }
+    };
 
 
     function getModulID() {
