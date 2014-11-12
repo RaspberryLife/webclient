@@ -1,68 +1,78 @@
 // =============================================================================
 // Optional parameters for java compilation
 // =============================================================================
+
 option java_package = "protobuf";
-option java_outer_classname = "RBHproto";
+option java_outer_classname = "RblProto";
 
 // =============================================================================
-// General RBHMessage
+// General RBLMessage
 // =============================================================================
-message RBHMessage {
+message RBLMessage {
+
+	// Range 1 - 20 : Message header
 	required string id = 1;
-    required MessageType mType = 2 [default = PLAIN_TEXT];
+	required MessageType mType = 2 [default = PLAIN_TEXT];
+	optional int32 messageNumber = 3;
 
-    optional PlainText plainText = 3;
-	optional RegisterInstructionObserver registerInstructionObserver = 4;
-	optional RunInstruction runInstruction = 5;
-	optional RegisterDataField registerDataField = 6;
-	optional UpdateDataField updateDataField = 7;
-	optional DataSet dataSet = 8;
-	optional GetDataSet getDataSet = 9;
+	// Range 21 - 30 : Basic messages
+	optional PlainText plainText = 21;
+
+	// Range 31 - 50 : Instruction messages
+	optional RunInstruction runInstruction = 31;
+
+	// Range 51 - 70 : Data operation messages
+
+	optional RegisterDataField registerDataField = 51;
+	optional UpdateDataField updateDataField = 52;
+	optional DataSet dataSet = 53;
+	optional GetDataSet getDataSet = 54;
 
 
-    enum MessageType {
-        PLAIN_TEXT = 0;
-        REGISTER_INSTRUCTION_OBSERVER = 1;
-        RUN_INSTRUCTION = 2;
-	    REGISTER_DATA_FIELD = 3;
-	    UPDATE_DATA_FIELD = 4;
-	    GET_DATA_SET = 5;
-	    DATA_SET = 6;
+	enum MessageType {
+		PLAIN_TEXT = 0;
+		REGISTER_INSTRUCTION_OBSERVER = 1;
+		RUN_INSTRUCTION = 2;
+		REGISTER_DATA_FIELD = 3;
+		UPDATE_DATA_FIELD = 4;
+		GET_DATA_SET = 5;
+		DATA_SET = 6;
 
-	    // All Auth-Types use PlainText as message content
-        AUTH_REQUEST = 7;
-        AUTH_DENIED = 8;
-        AUTH_ACCEPT = 9;
-    }
+		// All Auth-Types use PlainText as message content
+		AUTH_REQUEST = 7;
+		AUTH_DENIED = 8;
+		AUTH_ACCEPT = 9;
+	}
 // =============================================================================
 // General
 // =============================================================================
 
-    // Plaintext subtype for general purpose
-    message PlainText {
-        required string text = 1;
-    }
+	// Plaintext subtype for general purpose
+	message PlainText {
+		required string text = 1;
+	}
 
 // =============================================================================
 // Instruction subtypes
 // =============================================================================
-    message Instruction {
 
-        // Name of the instruction
-	    required string instructionID = 1;
-	    repeated string stringParameters = 2;
-	    repeated int32 intParameters = 3;
-    }
+	message Instruction {
+		// Name of the instruction
+		required int32 instructionID = 1;
+		repeated string stringParameters = 2;
+		repeated int32 intParameters = 3;
+	}
 
-    message RegisterInstructionObserver {
-        required string moduleID = 1;
-        required Instruction instruction = 2;
-    }
+	message RunInstruction {
+		required ModelType modeltype = 1;
+		required int32 targetModulID = 2;
+		required Instruction instruction = 3;
+	}
 
-    message RunInstruction {
-	    required string targetID = 1;
-	    required Instruction instruction = 2;
-    }
+	enum ModelType {
+		MODULE_TEMP = 1;
+		MODULE_OUTLET = 2;
+	}
 
 // =============================================================================
 // Data subtypes
@@ -118,4 +128,4 @@ message RBHMessage {
 	    repeated Data data = 3;
     }
 
-} // close RBHMessage
+} // close RBLMessage
