@@ -3,7 +3,7 @@
         }
          // Initialize ProtoBuf.js
         var ProtoBuf = dcodeIO.ProtoBuf;
-        var RBHMessage = ProtoBuf.loadProtoFile("raspberryhome.proto").build("RBHMessage");
+        var RBLMessage = ProtoBuf.loadProtoFile("raspberrylife.proto").build("RBLMessage");
 
     var id = document.getElementById("id");
     var mType = document.getElementById("mType");
@@ -27,7 +27,7 @@
     socket.onmessage = function (message) {
         try {
             // Decode the Message
-            var message = RBHMessage.decode(message.data);
+            var message = RBLMessage.decode(message.data);
             modulID = message.dataSet.modulID;
             modulType = message.dataSet.fieldID;
             modulValue = message.dataSet.count;
@@ -60,7 +60,7 @@
      // Send protobuf message
     function send() {
         if (socket.readyState == WebSocket.OPEN) {
-            var message = new RBHMessage("testid", RBHMessage.MessageType.PLAIN_TEXT, new RBHMessage.PlainText(plainText.value));
+            var message = new RBLMessage("testid", RBLMessage.MessageType.PLAIN_TEXT, new RBLMessage.PlainText(plainText.value));
             socket.send(message.toArrayBuffer());
             log.value += "> Message Sent: " + message.plainText.text + "\n";
             //socket.onmessage();
@@ -72,7 +72,7 @@
 
     function sendGetDataMessage() {
         if (socket.readyState == WebSocket.OPEN) {
-            var message = new RBHMessage("getdata", RBHMessage.MessageType.GET_DATA_SET, new RBHMessage.GetDataSet("livingrooom_sensormodule", "temp", 20, "bla", "bla2"));
+            var message = new RBLMessage("getdata", RBLMessage.MessageType.GET_DATA_SET, new RBLMessage.GetDataSet("livingrooom_sensormodule", "temp", 20, "bla", "bla2"));
 
 
             socket.send(message.toArrayBuffer());
@@ -86,7 +86,7 @@
      // Send authentication request
     function sendAuthRequestMessage() {
         if (socket.readyState == WebSocket.OPEN) {
-            var message = new RBHMessage("authrequest", RBHMessage.MessageType.AUTH_REQUEST, new RBHMessage.PlainText("abc12345"));
+            var message = new RBLMessage("authrequest", RBLMessage.MessageType.AUTH_REQUEST, new RBLMessage.PlainText("abc12345"));
             socket.send(message.toArrayBuffer());
             log.value += "> Authentication Request Sent\n";
         } else {

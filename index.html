@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <title>RaspberryLife</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -8,14 +7,11 @@
 
   <!-- Stylesheet imports -->
   <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/ripples.min.css" rel="stylesheet">
-  <link href="css/material-wfont.min.css" rel="stylesheet">
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.1.5/css/ripples.min.css" rel="stylesheet">
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.1.5/css/material-wfont.min.css" rel="stylesheet">
   <link href="css/custom.css" rel="stylesheet">
 </head>
-
 <body>
-
-
   <div class="navbar navbar-default">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
@@ -27,48 +23,41 @@
     </div>
     <div class="navbar-collapse collapse navbar-responsive-collapse">
       <ul class="nav navbar-nav">
-
       </ul>
-
     </div>
   </div>
-    <div class="container" style="max-width:500px">
-
-<div class="well bs-component">
-<form class="form-horizontal">
-    <fieldset>
-        <legend>Login</legend>
-        <p>Please login to proceed</p>
-        <div class="form-group">
+  <div class="container" style="max-width:500px">
+    <div class="well bs-component">
+      <form class="form-horizontal">
+        <fieldset>
+          <legend>Login</legend>
+          <p>Please login to proceed</p>
+          <div class="form-group">
             <label for="inputEmail" class="col-lg-2 control-label">Email</label>
             <div class="col-lg-10">
-                <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+              <input type="email" class="form-control" id="inputEmail" placeholder="Email">
             </div>
-        </div>
-        <div class="form-group">
+          </div>
+          <div class="form-group">
             <label for="inputPassword" class="col-lg-2 control-label">Password</label>
             <div class="col-lg-10">
-                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox"> Remember me
-                    </label>
-                </div>
+              <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"> Remember me
+                </label>
+              </div>
             </div>
-        </div>
-
-
-        <div class="form-group">
+          </div>
+          <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
-                <button type="button" class="btn btn-primary" onclick="window.location.href='overview.html'">Login</button>
+              <button type="button" class="btn btn-primary" onclick="window.location.href='overview.html'">Login</button>
             </div>
-        </div>
-    </fieldset>
-</form>
-</div>
-
-
+          </div>
+        </fieldset>
+      </form>
     </div>
+  </div>
   <div class="footer">
     <div class="container">
       <p class="text-muted">© 2014 RaspberryLife</p>
@@ -78,13 +67,12 @@
   <!-- Script imports -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  <script src="js/ripples.min.js"></script>
-  <script src="js/material.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.1.5/js/ripples.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.1.5/js/material.min.js"></script>
   <script>
-      $(document).ready(function() {
-          $.material.init();
-      });
+  $(document).ready(function() {
+    $.material.init();
+  });
   </script>
-
 </body>
 </html>

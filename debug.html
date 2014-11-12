@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <title>RaspberryLife</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -8,16 +7,11 @@
 
   <!-- Stylesheet imports -->
   <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/ripples.min.css" rel="stylesheet">
-  <link href="css/material-wfont.min.css" rel="stylesheet">
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.1.5/css/ripples.min.css" rel="stylesheet">
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.1.5/css/material-wfont.min.css" rel="stylesheet">
   <link href="css/custom.css" rel="stylesheet">
-
-
 </head>
-
 <body>
-
-
   <div class="navbar navbar-default">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
@@ -38,42 +32,37 @@
       </form>
     </div>
   </div>
+  <div  class="container">
+    <h1>Debugging console</h1>
+    <br>
+    <br>
+    <textarea id="log"></textarea>
+    <br />
+    <input type="plainText" id="plainText" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" value="enter protobuf plaintext" />
+    <button onclick="send()">Send protobuf message</button>
+    <button onclick="sendGetDataMessage()">Get data set</button>
+    <button onclick="sendAuthRequestMessage()">Send auth request</button>
+    <button onclick="getModulID()">Get modul ID</button>
+  </div>
 
-    <div  class="container">
-      <h1>Debugging console</h1>
-
-      <br>
-      <br>
-      <textarea id="log"></textarea>
-      <br />
-      <input type="plainText" id="plainText" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" value="enter protobuf plaintext" />
-      <button onclick="send()">Send protobuf message</button>
-      <button onclick="sendGetDataMessage()">Get data set</button>
-      <button onclick="sendAuthRequestMessage()">Send auth request</button>
-      <button onclick="getModulID()">Get modul ID</button>
-
-    </div>
-
-    <!-- Script imports -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="js/ripples.min.js"></script>
-    <script src="js/material.min.js"></script>
-    <script src="js/Long.min.js"></script>
-    <script src="js/ByteBufferAB.min.js"></script>
-    <script src="js/ProtoBuf.min.js"></script>
-    <script src="js/debug.js"></script>
-<script>
-    $(document).ready(function() {
-        $.material.init();
-    });
-</script>
-
+  <!-- Script imports -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.1.5/js/ripples.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.1.5/js/material.min.js"></script>
+  <script src="js/Long.min.js"></script>
+  <script src="js/ByteBufferAB.min.js"></script>
+  <script src="js/ProtoBuf.min.js"></script>
+  <script src="js/debug.js"></script>
+  <script>
+  $(document).ready(function() {
+    $.material.init();
+  });
+  </script>
   <div class="footer">
     <div class="container">
       <p class="text-muted">© 2014 RaspberryLife</p>
     </div>
   </div>
-
 </body>
 </html>
