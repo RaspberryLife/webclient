@@ -1,68 +1,74 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>RaspberryLife</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <meta charset="utf-8">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" />
+		<title>Raspberry Life</title>
 
-  <!-- Stylesheet imports -->
-  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-  <link href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.1.5/css/ripples.min.css" rel="stylesheet">
-  <link href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.1.5/css/material-wfont.min.css" rel="stylesheet">
-  <link href="css/custom.css" rel="stylesheet">
-</head>
-<body>
-  <div class="navbar navbar-default">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="overview.html">RaspberryLife</a>
-    </div>
-    <div class="navbar-collapse collapse navbar-responsive-collapse">
-      <ul class="nav navbar-nav">
-        <li><a href="overview.html">Overview</a></li>
-        <li class="active"><a href="debug.html">Debug</a></li>
-        <li><a href="#">Link2</a></li>
-      </ul>
-      <form class="navbar-form navbar-right">
-        <input type="text" class="form-control col-lg-8" placeholder="Search">
-      </form>
-    </div>
-  </div>
-  <div  class="container">
-    <h1>Debugging console</h1>
+		<link type="text/css" rel="stylesheet" href="css/custom.css" />
+		<link type="text/css" rel="stylesheet" href="css/jquery.mmenu.all.css" />
+		<link type="text/css" rel="stylesheet" href="css/jquery.mmenu.dragopen.css" />
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="js/hammer.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mmenu.min.all.js"></script>
+		<script type="text/javascript" src="js/jquery.mmenu.dragopen.min.js"></script>
+		<script type="text/javascript" src="js/ByteBufferAB.min.js"></script>
+		<script type="text/javascript" src="js/Long.min.js"></script>
+		<script type="text/javascript" src="js/ProtoBuf.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('nav#menu').mmenu({
+            dragOpen:  {
+open: true,
+maxStartPos: 1000
+            }
+         });
+
+});
+		</script>
+
+	</head>
+	<body>
+		<div id="page">
+			<div class="header">
+				<a href="#menu"></a>
+				RaspberryLife
+			</div>
+			<div class="content">
+
+			  <h1>Debugging console</h1>
+		Socket IP: <input type="socketIP" id="socketIP" size="12" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" value="localhost" />
+    <button onclick="createWebSocket()">Connect</button>
+		<br>
+		<br>
+    <textarea readonly id="log" style="width:95%; min-height:200px"></textarea>
     <br>
-    <br>
-    <textarea id="log"></textarea>
-    <br />
-    <input type="plainText" id="plainText" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" value="enter protobuf plaintext" />
+		<br>
+    <input type="plainText" id="plainText" size="15" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" value="protobuf plaintext" />
     <button onclick="send()">Send protobuf message</button>
+		<br>
+		<br>
     <button onclick="sendGetDataMessage()">Get data set</button>
     <button onclick="sendAuthRequestMessage()">Send auth request</button>
     <button onclick="getModulID()">Get modul ID</button>
-  </div>
 
-  <!-- Script imports -->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.1.5/js/ripples.min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.1.5/js/material.min.js"></script>
-  <script src="js/Long.min.js"></script>
-  <script src="js/ByteBufferAB.min.js"></script>
-  <script src="js/ProtoBuf.min.js"></script>
-  <script src="js/debug.js"></script>
-  <script>
-  $(document).ready(function() {
-    $.material.init();
-  });
-  </script>
-  <div class="footer">
-    <div class="container">
-      <p class="text-muted">© 2014 RaspberryLife</p>
-    </div>
-  </div>
-</body>
+			</div>
+			<nav id="menu">
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="#">Overview</a></li>
+					<li><a href="#rooms">Rooms</a>
+						<ul>
+							<li><a href="#rooms/room1">Room 1</a></li>
+							<li><a href="#rooms/room2">Room 2</a></li>
+							<li><a href="#rooms/fablab">FabLab</a></li>
+						</ul>
+					</li>
+					<li><a href="debug.html">Debugging</a></li>
+				</ul>
+			</nav>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/debug.js"></script>
 </html>
