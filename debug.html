@@ -19,11 +19,11 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$('nav#menu').mmenu({
-            dragOpen:  {
+					dragOpen:  {
 open: true,
 maxStartPos: 1000
-            }
-         });
+					}
+				});
 
 });
 		</script>
@@ -39,19 +39,28 @@ maxStartPos: 1000
 
 			  <h1>Debugging console</h1>
 		Socket IP: <input type="socketIP" id="socketIP" size="12" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" value="localhost" />
-    <button onclick="createWebSocket()">Connect</button>
+		<button onclick="createWebSocket()">Connect</button>
 		<br>
 		<br>
-    <textarea readonly id="log" style="width:95%; min-height:200px"></textarea>
-    <br>
-		<br>
-    <input type="plainText" id="plainText" size="15" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" value="protobuf plaintext" />
-    <button onclick="send()">Send protobuf message</button>
+		<textarea readonly id="log" style="width:95%; min-height:200px"></textarea>
 		<br>
 		<br>
-    <button onclick="sendGetDataMessage()">Get data set</button>
-    <button onclick="sendAuthRequestMessage()">Send auth request</button>
-    <button onclick="getModulID()">Get modul ID</button>
+		<input type="plainText" id="plainText" size="15" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" value="protobuf plaintext" />
+		<button onclick="send()">Send protobuf message</button>
+		<br>
+		<br>
+		<button onclick="sendGetDataMessage()">Get data set</button>
+		<button onclick="sendAuthRequestMessage()">Send auth request</button>
+		<button onclick="getModulID()">Get modul ID</button>
+		<br>
+		<br>
+		type<input type="type" id="type" size="3" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" value="bla" />
+	tID<input type="tID" id="tID" size="3" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" value="bla" />
+function<input type="func" id="func" size="3" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" value="bla" />
+param<input type="param" id="param" size="3" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" value="bla" />
+
+		<button onclick="sendInstructionMessage()">Send Instruction</button>
+
 
 			</div>
 			<nav id="menu">
