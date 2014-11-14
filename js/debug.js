@@ -8,6 +8,11 @@ var type = document.getElementById("type");
 var tID = document.getElementById("tID");
 var func = document.getElementById("func");
 var param = document.getElementById("param");
+var modul = document.getElementById("modul");
+var field = document.getElementById("field");
+var count = document.getElementById("count");
+var startDate = document.getElementById("startDate");
+var endDate = document.getElementById("endDate");
 var clientID = "webclient1";
 var log = document.getElementById("log");
 var message;
@@ -74,10 +79,17 @@ function getModulID() {
 // Send protobuf message
 function send() {
     if (socket.readyState === WebSocket.OPEN) {
-        message = new RBLMessage(clientID, RBLMessage.MessageType.PLAIN_TEXT, 0, new RBLMessage.PlainText(plainText.value));
+        message = new RBLMessage({
+            "id": clientID,
+            "mType": "PLAIN_TEXT",
+            "messageNumber": "1337",
+            "plainText": {
+                "text": plainText.value
+            }
+        });
+
         socket.send(message.toArrayBuffer());
         appendToLog("Message sent: " + message.plainText.text);
-        //socket.onmessage();
     } else {
         appendToLog("Not connected");
     }
@@ -85,8 +97,25 @@ function send() {
 
 function sendGetDataMessage() {
     if (socket.readyState === WebSocket.OPEN) {
-        var message = new RBLMessage(clientID, RBLMessage.MessageType.GET_DATA_SET, 0, new RBLMessage.GetDataSet(
-            "livingrooom_sensormodule", "temp", 20, "bla", "bla2"));
+        modul = document.getElementById("modul").value;
+        field = document.getElementById("field").value;
+        count = document.getElementById("count").value;
+        startDate = document.getElementById("startDate").value;
+        endDate = document.getElementById("endDate").value;
+
+        message = new RBLMessage({
+            "id": clientID,
+            "mType": "GET_DATA_SET",
+            "messageNumber": "1337",
+            "getDataSet": {
+                "modulID": modul,
+                "fieldID": field,
+                "count": count,
+                "startDateTime": startDate,
+                "endDateTime": endDate
+            }
+        });
+
         socket.send(message.toArrayBuffer());
         appendToLog("Get Data Request sent");
     } else {
@@ -112,11 +141,10 @@ function sendInstructionMessage() {
                       }
         var intParams = [];
         intParams.push(param);
-
-        var message = new RBLMessage({
-            "id": "clientID",
+        message = new RBLMessage({
+            "id": clientID,
             "mType": "RUN_INSTRUCTION",
-            "messageNumber": "123",
+            "messageNumber": "1337",
             "runInstruction": {
                 "modeltype": type,
                 "targetModulID": tID,
@@ -126,6 +154,7 @@ function sendInstructionMessage() {
                 }
             }
         });
+
         socket.send(message.toArrayBuffer());
         appendToLog("Instruction sent");
     } else {
@@ -136,7 +165,15 @@ function sendInstructionMessage() {
 // Send authentication request
 function sendAuthRequestMessage() {
     if (socket.readyState == WebSocket.OPEN) {
-        var message = new RBLMessage(clientID, RBLMessage.MessageType.AUTH_REQUEST, 0, new RBLMessage.PlainText("abc12345"));
+        message = new RBLMessage({
+            "id": clientID,
+            "mType": "AUTH_REQUEST",
+            "messageNumber": "1337",
+            "plainText": {
+                "text": "abc12345"
+            }
+        });
+
         socket.send(message.toArrayBuffer());
         appendToLog("Authentication Request Sent");
     } else {
