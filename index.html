@@ -1,60 +1,79 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" />
 
-		<title>Raspberry Life</title>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" name="viewport">
+    <title>
+        Raspberry Life
+    </title>
+    <link href="css/custom.css" rel="stylesheet" type="text/css">
+    <link href="css/jquery.mmenu.all.css" rel="stylesheet" type="text/css">
+    <link href="css/jquery.mmenu.dragopen.css" rel="stylesheet" type="text/css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
+    <script src="js/hammer.min.js" type="text/javascript"></script>
+    <script src="js/jquery.mmenu.min.all.js" type="text/javascript"></script>
+    <script src="js/jquery.mmenu.dragopen.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(
+            function () {
+                $('nav#menu')
+                    .mmenu({
+                        dragOpen: {
+                            open: true,
+                            maxStartPos: 1000
+                        }
+                    });
+            });
+    </script>
+</head>
 
-		<link type="text/css" rel="stylesheet" href="css/custom.css" />
-		<link type="text/css" rel="stylesheet" href="css/jquery.mmenu.all.css" />
-		<link type="text/css" rel="stylesheet" href="css/jquery.mmenu.dragopen.css" />
+<body>
+    <div id="page">
+        <div class="header">
+            <a href="#menu"></a>RaspberryLife
+        </div>
 
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-		<script type="text/javascript" src="js/hammer.min.js"></script>
-		<script type="text/javascript" src="js/jquery.mmenu.min.all.js"></script>
-		<script type="text/javascript" src="js/jquery.mmenu.dragopen.min.js"></script>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$('nav#menu').mmenu({
-            dragOpen:  {
-open: true,
-maxStartPos: 1000
-            }
-         });
+        <div class="content">
+            <p>
+                <strong>Welcome to the RaspberryLife Webclient</strong>
+                <br>Click the menu icon or swipe from the left border to open the menu.
+            </p>
+        </div>
 
-});
-		</script>
+        <nav id="menu">
+            <ul>
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
 
+                <li>
+                    <a href="#">Overview</a>
+                </li>
 
+                <li>
+                    <a href="#rooms">Rooms</a>
+                    <ul>
+                        <li>
+                            <a href="#rooms/room1">Room 1</a>
+                        </li>
 
-	</head>
-	<body>
-		<div id="page">
-			<div class="header">
-				<a href="#menu"></a>
-				RaspberryLife
-			</div>
-			<div class="content">
-				<p><strong>Welcome to the RaspberryLife Webclient</strong><br />
-					Click the menu icon or swipe from the left border to open the menu.</p>
+                        <li>
+                            <a href="#rooms/room2">Room 2</a>
+                        </li>
 
+                        <li>
+                            <a href="#rooms/fablab">FabLab</a>
+                        </li>
+                    </ul>
+                </li>
 
-			</div>
-			<nav id="menu">
-				<ul>
-					<li><a href="index.html">Home</a></li>
-					<li><a href="#">Overview</a></li>
-					<li><a href="#rooms">Rooms</a>
-						<ul>
-							<li><a href="#rooms/room1">Room 1</a></li>
-							<li><a href="#rooms/room2">Room 2</a></li>
-							<li><a href="#rooms/fablab">FabLab</a></li>
-						</ul>
-					</li>
-					<li><a href="debug.html">Debugging</a></li>
-				</ul>
-			</nav>
-		</div>
-	</body>
+                <li>
+                    <a href="debug.html">Debugging</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</body>
+
 </html>
