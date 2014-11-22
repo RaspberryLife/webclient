@@ -1,107 +1,171 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" name="viewport">
-    <title>
-        Raspberry Life
-    </title>
-    <link href="css/custom.css" rel="stylesheet" type="text/css">
-    <link href="css/jquery.mmenu.all.css" rel="stylesheet" type="text/css">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
-    <script src="js/hammer.min.js" type="text/javascript"></script>
-    <script src="js/jquery.mmenu.min.all.js" type="text/javascript"></script>
-    <script src="js/ByteBufferAB.min.js" type="text/javascript"></script>
-    <script src="js/Long.min.js" type="text/javascript"></script>
-    <script src="js/ProtoBuf.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('nav#menu').mmenu({
-                dragOpen: {
-                    open: true,
-                    maxStartPos: 1000
-                },
-                classes: "mm-slide"
-            });
-        });
-    </script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>RaspberryLife - Admin Panel</title>
+
+<!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<!-- MetisMenu CSS -->
+<link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="css/sb-admin-2.css" rel="stylesheet">
+
+<!-- Custom Fonts -->
+<link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
 </head>
 
 <body>
-    <div id="page">
-        <div class="header">
-            <a href="#menu"></a>RaspberryLife
-        </div>
 
-        <div class="content">
-            <h1>
-				Debugging console
-			</h1> Socket IP:
-            <input id="socketIP" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="12" type="socketip" value="localhost">
-            <button onclick="createWebSocket()">Connect</button>
-            <button onclick="sendAuthRequestMessage()">Send auth request</button>
-            <br>
-            <br>
+  <div id="wrapper">
 
-            <textarea id="log" readonly style="width:95%; min-height:200px">
-            </textarea>
-            <br>
-            <br>
-            <input id="plainText" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="15" type="plaintext" value="protobuf plaintext">
-            <button onclick="send()">Send protobuf message</button>
-            <br>
-            <br>modul
-            <input id="modul" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="15" type="modul" value="livingrooom_sensormodule"> field
-            <input id="field" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="3" type="field" value="temp"> count
-            <input id="count" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="3" type="count" value="20"> startDate
-            <input id="startDate" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="8" type="startDate" value=""> endDate
-            <input id="endDate" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="8" type="endDate" value="">
-            <button onclick="sendGetDataMessage()">Get data set</button>
-            <button onclick="getModulID()">Get modul ID</button>
-            <br>
-            <br>type
-            <input id="type" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="3" type="type" value=""> tID
-            <input id="tID" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="3" type="tid" value=""> function
-            <input id="func" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="3" type="func" value=""> param
-            <input id="param" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="3" type="param" value="">
-            <button onclick="sendInstructionMessage()">Send Instruction</button>
-        </div>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">RaspberryLife</a>
+      </div>
+      <!-- /.navbar-header -->
 
-        <nav id="menu">
-            <ul>
+      <ul class="nav navbar-top-links navbar-right">
+
+        <!-- /.dropdown -->
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+            </li>
+            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+            </li>
+            <li class="divider"></li>
+            <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+            </li>
+          </ul>
+          <!-- /.dropdown-user -->
+        </li>
+        <!-- /.dropdown -->
+      </ul>
+      <!-- /.navbar-top-links -->
+
+      <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+          <ul class="nav" id="side-menu">
+
+            <li>
+              <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+            </li>
+
+            <li>
+              <a href="#"><i class="fa fa-home fa-fw"></i> Rooms<span class="fa arrow"></span></a>
+              <ul class="nav nav-second-level">
                 <li>
-                    <a href="index.html">Home</a>
+                  <a href="index.html">Room 1</a>
                 </li>
-
                 <li>
-                    <a href="#">Overview</a>
+                  <a href="index.html">Room 2</a>
                 </li>
-
                 <li>
-                    <a href="#rooms">Rooms</a>
-                    <ul>
-                        <li>
-                            <a href="#rooms/room1">Room 1</a>
-                        </li>
-
-                        <li>
-                            <a href="#rooms/room2">Room 2</a>
-                        </li>
-
-                        <li>
-                            <a href="#rooms/fablab">FabLab</a>
-                        </li>
-                    </ul>
+                  <a href="index.html">FabLab</a>
                 </li>
-
-                <li>
-                    <a href="debug.html">Debugging</a>
-                </li>
+              </ul>
+              <!-- /.nav-second-level -->
+              <li>
+                <a class="active" href="debug.html"><i class="fa fa-terminal fa-fw"></i> Debug</a>
+                <!-- /.nav-second-level -->
+              </li>
             </ul>
-        </nav>
+          </div>
+          <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
+      </nav>
+
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                      <h1>
+                        Debugging console
+                      </h1> Socket IP:
+                      <input id="socketIP" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="12" type="socketip" value="localhost">
+                      <button onclick="createWebSocket()">Connect</button>
+                      <button onclick="sendAuthRequestMessage()">Send auth request</button>
+                      <br>
+                      <br>
+
+                      <textarea id="log" readonly style="width:95%; min-height:200px">
+                      </textarea>
+                      <br>
+                      <br>
+                      <input id="plainText" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="15" type="plaintext" value="protobuf plaintext">
+                      <button onclick="send()">Send protobuf message</button>
+                      <br>
+                      <br>modul
+                      <input id="modul" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="15" type="modul" value="livingrooom_sensormodule"> field
+                      <input id="field" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="3" type="field" value="temp"> count
+                      <input id="count" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="3" type="count" value="20"> startDate
+                      <input id="startDate" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="8" type="startDate" value=""> endDate
+                      <input id="endDate" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="8" type="endDate" value="">
+                      <button onclick="sendGetDataMessage()">Get data set</button>
+                      <button onclick="getModulID()">Get modul ID</button>
+                      <br>
+                      <br>type
+                      <input id="type" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="3" type="type" value=""> tID
+                      <input id="tID" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="3" type="tid" value=""> function
+                      <input id="func" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="3" type="func" value=""> param
+                      <input id="param" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="3" type="param" value="">
+                      <button onclick="sendInstructionMessage()">Send Instruction</button>
+
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+
     </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery-2.1.1.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/sb-admin-2.js"></script>
+
+    <!-- ProtoBuf Related JavaScript -->
+    <script src="js/plugins/protobuf/ByteBufferAB.min.js" type="text/javascript"></script>
+    <script src="js/plugins/protobuf/Long.min.js" type="text/javascript"></script>
+    <script src="js/plugins/protobuf/ProtoBuf.min.js" type="text/javascript"></script>
+
+    <!-- Debugging Console JavaScript -->
     <script src="js/debug.js" type="text/javascript"></script>
+
+
 </body>
 
 </html>

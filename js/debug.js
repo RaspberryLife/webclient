@@ -1,6 +1,6 @@
 // Initialize ProtoBuf.js
 var ProtoBuf = dcodeIO.ProtoBuf;
-var RBLMessage = ProtoBuf.loadProtoFile("raspberrylife.proto")
+var RBLMessage = ProtoBuf.loadProtoFile("../proto/raspberrylife.proto")
     .build("RBLMessage");
 var currentTime;
 var plainText = document.getElementById("plainText");
@@ -23,6 +23,7 @@ var startDateTime;
 var endDateTime;
 var testFloat1;
 var socket = "";
+
 
 // Default socket IP
 var socketIP = "localhost";
