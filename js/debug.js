@@ -13,7 +13,7 @@ var field = document.getElementById("field");
 var count = document.getElementById("count");
 var startDate = document.getElementById("startDate");
 var endDate = document.getElementById("endDate");
-var clientID = "webclient1";
+var clientID = "webclient v0.2";
 var log = document.getElementById("log");
 var message;
 var modulID;
@@ -77,12 +77,13 @@ function getModulID() {
 	return modulID;
 }
 
-// Send protobuf message
-function send() {
+// Send protobuf plainText message
+function sendPlainTextMessage() {
 	if (socket.readyState === WebSocket.OPEN) {
 		message = new RBLMessage({
 			"id": clientID,
-			"mType": "PLAIN_TEXT",
+			"messageType": "PLAIN_TEXT",
+			"messageFlag": "REQUEST",
 			"messageNumber": "1337",
 			"plainText": {
 				"text": plainText.value
@@ -106,14 +107,20 @@ function sendGetDataMessage() {
 
 		message = new RBLMessage({
 			"id": clientID,
-			"mType": "GET_DATA_SET",
+			"messageType": "GET_DATA",
+			"messageFlag": "REQUEST",
 			"messageNumber": "1337",
-			"getDataSet": {
-				"modulID": modul,
-				"fieldID": field,
-				"count": count,
-				"startDateTime": startDate,
-				"endDateTime": endDate
+			"getData": {
+				"actuator": {
+					"actuatorType": "MODULE",
+					"actuatorId": "1"
+				},
+				"fieldId": "1",
+				"range": {
+					"count": count,
+					"startDateTime": startDate,
+					"endDateTime": endDate
+				}
 			}
 		});
 
@@ -168,7 +175,8 @@ function sendInstructionMessage() {
 			if (socket.readyState == WebSocket.OPEN) {
 				message = new RBLMessage({
 					"id": clientID,
-					"mType": "AUTH_REQUEST",
+					"messageType": "AUTH",
+					"messageFlag": "REQUEST",
 					"messageNumber": "1337",
 					"plainText": {
 						"text": "abc12345"
