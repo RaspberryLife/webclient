@@ -1,7 +1,9 @@
+/*global document*/
+
 // Initialize ProtoBuf.js
-var ProtoBuf = dcodeIO.ProtoBuf;
-var RBLMessage = ProtoBuf.loadProtoFile("../proto/raspberrylife.proto")
-.build("RBLMessage");
+var dcodeIO;
+var RBLMessage = dcodeIO.ProtoBuf.loadProtoFile("../proto/raspberrylife.proto").build("RBLMessage");
+var WebSocket;
 var currentTime;
 var plainText = document.getElementById("plainText");
 var type = document.getElementById("type");

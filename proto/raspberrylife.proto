@@ -36,6 +36,7 @@ message RBLMessage {
 	enum MessageFlag{
 		REQUEST = 0;
 		RESPONSE = 1;
+		DEBUG = 99;
 	}
 
 	enum MessageType {
@@ -47,7 +48,7 @@ message RBLMessage {
 		LOGIC = 5;
 
 		// All authentication messages use PlainText as message content
-		AUTH = 7;
+		AUTH = 6;
 	}
 
 	enum ModuleType{
