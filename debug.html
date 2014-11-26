@@ -93,10 +93,13 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<h1>
-								Debugging console
-							</h1> Socket IP:
+								Debug console
+							</h1>
+							<br>Socket IP: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<input id="socketIP" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="12" type="socketip" value="localhost">
 							<button onclick="createWebSocket()">Connect</button>
+							<br> Authentication key:
+							<input id="authKey" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="12" type="authKey" value="abc12345">
 							<button onclick="sendAuthRequestMessage()">Send auth request</button>
 							<br>
 							<br>
@@ -105,33 +108,34 @@
 							</textarea>
 							<br>
 							<br>
-							<input id="plainText" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="15" type="plaintext" value="protobuf plaintext">
+							<input id="plainText" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="15" type="plaintext" value="sample plaintext">
 							<button onclick="sendPlainTextMessage()">Send protobuf message</button>
 							<br>
-							<br>actuator
-							<input id="modul" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="15" type="modul" value="livingrooom_sensormodule">
-							<br>fieldId
-							<input id="field" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="3" type="field" value="temp">
-							<br>count
-							<input id="count" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="3" type="count" value="20">
-							<br>startDateTime
+							<br>actuatorType
+							<input id="actuatorType" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="6" type="actuatorType" value="MODULE">
+							<br>actuator &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input id="actuator" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="2" type="actuator" value="1">
+							<br>fieldId &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input id="field" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="2" type="field" value="1">
+							<br>count &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input id="count" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="2" type="count" value="1">
+							<br>startDateTime &nbsp;
 							<input id="startDate" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="8" type="startDate" value="">
-							<br>endDateTime
+							<br>endDateTime &nbsp;&nbsp;
 							<input id="endDate" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="8" type="endDate" value="">
 							<button onclick="sendGetDataMessage()">Get data set</button>
-							<button onclick="getModulID()">Get modul ID</button>
 							<br>
 							<br>
 							<br>
-							<br>type
-							<input id="type" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="3" type="type" value="">
-							<br>tID
-							<input id="tID" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="3" type="tid" value="">
-							<br>function
-							<input id="func" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="3" type="func" value="">
-							<br>param
-							<input id="param" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="3" type="param" value="">
-							<button onclick="sendInstructionMessage()">Send Instruction</button>
+							<br>actuatorType
+							<input id="actuatorType2" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="6" type="actuatorType2" value="MODULE">
+							<br>actuator &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input id="actuator2" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="3" type="actuator2" value="1">
+							<br>instructionId &nbsp;
+							<input id="instructionId" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="3" type="instructionId" value="1">
+							<br>intParam &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input id="intParam" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="3" type="intParam" value="1">
+							<button onclick="sendInstructionMessage()">Send instruction</button>
 
 						</div>
 					</div>

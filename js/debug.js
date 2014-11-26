@@ -5,12 +5,15 @@ var dcodeIO;
 var RBLMessage = dcodeIO.ProtoBuf.loadProtoFile("../proto/raspberrylife.proto").build("RBLMessage");
 var WebSocket;
 var currentTime;
+var socketIP = document.getElementById("socketIP");
+var authKey = document.getElementById("authKey");
 var plainText = document.getElementById("plainText");
-var type = document.getElementById("type");
-var tID = document.getElementById("tID");
-var func = document.getElementById("func");
-var param = document.getElementById("param");
-var modul = document.getElementById("modul");
+var actuator = document.getElementById("actuator");
+var actuator2 = document.getElementById("actuator2");
+var actuatorType = document.getElementById("actuatorType");
+var actuatorType2 = document.getElementById("actuatorType2");
+var instructionID = document.getElementById("instructionId");
+var intParam = document.getElementById("intParam");
 var field = document.getElementById("field");
 var count = document.getElementById("count");
 var startDate = document.getElementById("startDate");
@@ -18,23 +21,26 @@ var endDate = document.getElementById("endDate");
 var clientID = "webclient v0.2";
 var log = document.getElementById("log");
 var message;
-var modulID;
-var modulType;
-var modulValue;
+var messageID;
+var messageType;
+var messageFlag;
+var fieldID;
+var dataType;
+var stringData;
+var int32Data;
+var floatData;
 var startDateTime;
 var endDateTime;
 var testFloat1;
-var socket = "";
+var socket;
 
 
 // Default socket IP
-var socketIP = "localhost";
+//var socketIP = "localhost";
 
 // Connect to websocket
 function createWebSocket() {
-	socketIP = document.getElementById("socketIP")
-	.value;
-	socket = new WebSocket("ws://" + socketIP + ":6680/websocket-echo");
+	socket = new WebSocket("ws://" + socketIP.value + ":6680/websocket-echo");
 	socket.binaryType = "arraybuffer";
 
 	socket.onopen = function () {
@@ -49,15 +55,26 @@ function createWebSocket() {
 		try {
 			// Decode the Message
 			message = RBLMessage.decode(message.data);
-			modulID = message.dataSet.modulID;
-			modulType = message.dataSet.fieldID;
-			modulValue = message.dataSet.count;
-			startDateTime = message.dataSet.startDateTime;
-			endDateTime = message.dataSet.endDateTime;
-			testFloat1 = message.dataSet.data;
-			appendToLog("Modul: " + modulID);
-			appendToLog("Einheit: " + modulType);
-			appendToLog("Wert: " + modulValue);
+			messageID = message.id;
+			messageType = message.messageType;
+			messageFlag = message.messageFlag;
+			fieldID = message.data.fieldId;
+			dataType = message.data.dataType;
+			stringData = message.data.stringData;
+			int32Data = message.data.int32Data;
+			floatData = message.data.floatData;
+			startDateTime = message.data.startDateTime;
+			endDateTime = message.data.endDateTime;
+			testFloat1 = message.data.data;
+
+			appendToLog("Message ID: " + messageID);
+			appendToLog("Message Type: " + messageType);
+			appendToLog("Message Flag: " + messageFlag);
+			appendToLog("Field ID: " + fieldID);
+			appendToLog("Data Type: " + dataType);
+			appendToLog("String Data: " + stringData);
+			appendToLog("Int32 Data: " + int32Data);
+			appendToLog("Float Data: " + floatData);
 			appendToLog("Datum von: " + startDateTime);
 			appendToLog("Datum bis: " + endDateTime);
 			appendToLog("Object type: " + Object.prototype.toString.call(testFloat1));
@@ -72,11 +89,6 @@ function getCurrentTime() {
 	var date = new Date();
 	currentTime = date.toLocaleTimeString() + " ";
 	return currentTime;
-}
-
-function getModulID() {
-	appendToLog("MODUL ID: " + modulID);
-	return modulID;
 }
 
 // Send protobuf plainText message
@@ -101,12 +113,6 @@ function sendPlainTextMessage() {
 
 function sendGetDataMessage() {
 	if (socket.readyState === WebSocket.OPEN) {
-		modul = document.getElementById("modul").value;
-		field = document.getElementById("field").value;
-		count = document.getElementById("count").value;
-		startDate = document.getElementById("startDate").value;
-		endDate = document.getElementById("endDate").value;
-
 		message = new RBLMessage({
 			"id": clientID,
 			"messageType": "GET_DATA",
@@ -114,14 +120,14 @@ function sendGetDataMessage() {
 			"messageNumber": "1337",
 			"getData": {
 				"actuator": {
-					"actuatorType": "MODULE",
-					"actuatorId": "1"
+					"actuatorType": actuatorType.value,
+					"actuatorId": actuator.value
 				},
-				"fieldId": "1",
+				"fieldId": field.value,
 				"range": {
-					"count": count,
-					"startDateTime": startDate,
-					"endDateTime": endDate
+					"count": count.value,
+					"startDateTime": startDate.value,
+					"endDateTime": endDate.value
 				}
 			}
 		});
@@ -135,13 +141,8 @@ function sendGetDataMessage() {
 
 function sendInstructionMessage() {
 	if (socket.readyState === WebSocket.OPEN) {
-		type = document.getElementById("type").value;
-		tID = document.getElementById("tID").value;
-		func = document.getElementById("func").value;
-		param = document.getElementById("param").value;
-
 		var mt = RBLMessage.ModelType.MODULE_TEMP;
-		switch (type){
+		switch (actuator2){
 			case 1:
 				mt = RBLMessage.ModelType.MODULE_TEMP;
 				break;
@@ -150,16 +151,19 @@ function sendInstructionMessage() {
 					break;
 				}
 				var intParams = [];
-				intParams.push(param);
+				intParams.push(intParam.value);
 				message = new RBLMessage({
 					"id": clientID,
-					"mType": "RUN_INSTRUCTION",
+					"messageType": "RUN_INSTRUCTION",
+					"messageFlag": "REQUEST",
 					"messageNumber": "1337",
 					"runInstruction": {
-						"modeltype": type,
-						"targetModulID": tID,
+						"actuator": {
+							"actuatorType": actuatorType2.value,
+							"actuatorId": actuator2.value,
+						},
 						"instruction": {
-							"instructionID": "3",
+							"instructionID": instructionID.value,
 							"intParameters": intParams
 						}
 					}
@@ -181,7 +185,7 @@ function sendInstructionMessage() {
 					"messageFlag": "REQUEST",
 					"messageNumber": "1337",
 					"plainText": {
-						"text": "abc12345"
+						"text": authKey.value
 					}
 				});
 
@@ -192,7 +196,7 @@ function sendInstructionMessage() {
 			}
 		}
 
-		// Append message to logS
+		// Append message to log
 		function appendToLog(logmsg) {
 			log.value += getCurrentTime() + "> " + logmsg + "\n";
 		}
