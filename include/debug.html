@@ -3,9 +3,7 @@
 			<!-- Page Content -->
 					<div class="row">
 						<div class="col-lg-12">
-							<h1>
-								Debug console
-							</h1>
+							<h1 class="page-header">Debug console</h1>
 							<br>Socket IP: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<input id="socketIP" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="12" type="socketip" value="localhost">
 							<button onclick="createWebSocket()">Connect</button>
@@ -54,4 +52,13 @@
 
 						</div>
 					</div>
+
+<!-- ProtoBuf Related JavaScript -->
+<script src="js/plugins/protobuf/ByteBufferAB.min.js" type="text/javascript"></script>
+<script src="js/plugins/protobuf/Long.min.js" type="text/javascript"></script>
+
+<script src="js/plugins/protobuf/ProtoBuf.min.js" type="text/javascript"></script>
+
+<!-- Debugging Console JavaScript -->
+<script src="js/debug.js" type="text/javascript"></script>
 </html>

@@ -16,6 +16,9 @@
 	<!-- MetisMenu CSS -->
 	<link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
 
+	<!-- Logic CSS -->
+	<link href="css/plugins/logic.css" rel="stylesheet" type="text/css">
+
 	<!-- Custom CSS -->
 	<link href="css/sb-admin-2.css" rel="stylesheet">
 
@@ -63,7 +66,7 @@
 				<div class="sidebar-nav navbar-collapse">
 					<ul class="nav" id="side-menu">
 						<li>
-							<a class="active" href="#/home"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+							<a id="home" class="active" href="#/home"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 						</li>
 						<li>
 							<a href="#"><i class="fa fa-home fa-fw"></i> Rooms<span class="fa arrow"></span></a>
@@ -79,10 +82,10 @@
 								</li>
 							</ul>
                             <li>
-								<a href="#/logic"><i class="fa fa-terminal fa-fw"></i> Logic</a>
+								<a id="logic" href="#/logic"><i class="fa fa-sliders fa-fw"></i> Logic</a>
 							</li>
                         	<li>
-								<a href="#/debug"><i class="fa fa-terminal fa-fw"></i> Debug</a>
+								<a id="debug" href="#/debug"><i class="fa fa-terminal fa-fw"></i> Debug</a>
 							</li>
 						</li>
 					</ul>
@@ -116,22 +119,31 @@
 		<script src="js/sb-admin-2.js"></script>
 
 		<!--  Sammy RESTful navigation-->
-		<script src="js/sammy-0.7.5.min.js"></script>
+		<script src="js/plugins/sammy/sammy-0.7.5.min.js"></script>
 
 		<script type="text/javascript" charset="utf-8">
 		;(function($) {
 			var app = $.sammy('.content', function() {
 
+
 				this.get('#/home', function() {
 					this.swap('include/landing.html');
+									$('#side-menu li a').removeClass('active');
+
+					jQuery('#home').addClass('active');
 				});
 
 				this.get('#/logic', function() {
+									$('#side-menu li a').removeClass('active');
+					$('#logic').addClass('active');
+
 					this.swap('include/logic.html');
 				});
 
 				this.get('#/debug', function() {
 					this.swap('include/debug.html');
+									$('#side-menu li a').removeClass('active');
+					$('#debug').addClass('active');
 				});
 
 				this.get('#/login', function() {
@@ -140,9 +152,9 @@
 
 				this.swap = function(content, callback) {
 					var context = this;
-					context.$element().fadeOut('slow', function() {
+					context.$element().fadeOut('fast', function() {
 						context.$element().load(content, function(){
-							context.$element().fadeIn('slow');
+							context.$element().fadeIn('fast');
 						});
 					});
 				};
