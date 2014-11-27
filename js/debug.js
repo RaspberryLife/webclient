@@ -2,7 +2,7 @@
 
 // Initialize ProtoBuf.js
 var dcodeIO;
-var RBLMessage = dcodeIO.ProtoBuf.loadProtoFile("../proto/raspberrylife.proto").build("RBLMessage");
+var RBLMessage = dcodeIO.ProtoBuf.loadProtoFile("proto/raspberrylife.proto").build("RBLMessage");
 var WebSocket;
 var currentTime;
 var socketIP = document.getElementById("socketIP");
@@ -141,13 +141,13 @@ function sendGetDataMessage() {
 
 function sendInstructionMessage() {
 	if (socket.readyState === WebSocket.OPEN) {
-		var mt = RBLMessage.ModelType.MODULE_TEMP;
+		var mt = RBLMessage.ModuleType.MODULE_TEMP;
 		switch (actuator2){
 			case 1:
-				mt = RBLMessage.ModelType.MODULE_TEMP;
+				mt = RBLMessage.ModuleType.MODULE_TEMP;
 				break;
 				case 2:
-					mt = RBLMessage.ModelType.MODULE_OUTLET;
+					mt = RBLMessage.ModuleType.MODULE_OUTLET;
 					break;
 				}
 				var intParams = [];
@@ -163,7 +163,7 @@ function sendInstructionMessage() {
 							"actuatorId": actuator2.value,
 						},
 						"instruction": {
-							"instructionID": instructionID.value,
+							"instructionId": instructionID.value,
 							"intParameters": intParams
 						}
 					}
