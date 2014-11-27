@@ -13,6 +13,8 @@ var actuator2 = document.getElementById("actuator2");
 var actuatorType = document.getElementById("actuatorType");
 var actuatorType2 = document.getElementById("actuatorType2");
 var instructionID = document.getElementById("instructionId");
+var moduleType = document.getElementById("moduleType");
+var moduleID = document.getElementById("moduleID");
 var intParam = document.getElementById("intParam");
 var field = document.getElementById("field");
 var count = document.getElementById("count");
@@ -141,15 +143,6 @@ function sendGetDataMessage() {
 
 function sendInstructionMessage() {
 	if (socket.readyState === WebSocket.OPEN) {
-		var mt = RBLMessage.ModuleType.MODULE_TEMP;
-		switch (actuator2){
-			case 1:
-				mt = RBLMessage.ModuleType.MODULE_TEMP;
-				break;
-				case 2:
-					mt = RBLMessage.ModuleType.MODULE_OUTLET;
-					break;
-				}
 				var intParams = [];
 				intParams.push(intParam.value);
 				message = new RBLMessage({
@@ -164,7 +157,9 @@ function sendInstructionMessage() {
 						},
 						"instruction": {
 							"instructionId": instructionID.value,
-							"intParameters": intParams
+							"intParameters": intParams,
+							"moduleType": moduleType.value,
+							"moduleId": moduleID.value
 						}
 					}
 				});
