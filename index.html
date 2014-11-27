@@ -52,7 +52,7 @@
 						<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
 						</li>
 						<li class="divider"></li>
-						<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+						<li><a href="#/login"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
 						</li>
 					</ul>
 				</li>
@@ -63,23 +63,26 @@
 				<div class="sidebar-nav navbar-collapse">
 					<ul class="nav" id="side-menu">
 						<li>
-							<a class="active" href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+							<a class="active" href="#/home"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 						</li>
 						<li>
 							<a href="#"><i class="fa fa-home fa-fw"></i> Rooms<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li>
-									<a href="index.html">Room 1</a>
+									<a href="#/room/1">Room 1</a>
 								</li>
 								<li>
-									<a href="index.html">Room 2</a>
+									<a href="#/room/2">Room 2</a>
 								</li>
 								<li>
-									<a href="index.html">FabLab</a>
+									<a href="#/room/fablab">FabLab</a>
 								</li>
 							</ul>
-							<li>
-								<a href="debug.html"><i class="fa fa-terminal fa-fw"></i> Debug</a>
+                            <li>
+								<a href="#/logic"><i class="fa fa-terminal fa-fw"></i> Logic</a>
+							</li>
+                        	<li>
+								<a href="#/debug"><i class="fa fa-terminal fa-fw"></i> Debug</a>
 							</li>
 						</li>
 					</ul>
@@ -90,15 +93,15 @@
 			<!-- Page Content -->
 			<div id="page-wrapper">
 				<div class="container-fluid">
-					<div class="row">
-						<div class="col-lg-12">
-							<h1 class="page-header">Welcome to the RaspberryLife Webclient</h1>
-						</div>
-					</div>
+
+					<div class="content"></div>
+
 				</div>
 			</div>
 
-		</div>
+		</div> <!--  End wrapper-->
+
+
 
 		<!-- jQuery -->
 		<script src="js/jquery-2.1.1.min.js"></script>
@@ -111,6 +114,47 @@
 
 		<!-- Custom Theme JavaScript -->
 		<script src="js/sb-admin-2.js"></script>
+
+		<!--  Sammy RESTful navigation-->
+		<script src="js/sammy-0.7.5.min.js"></script>
+
+		<script type="text/javascript" charset="utf-8">
+		;(function($) {
+			var app = $.sammy('.content', function() {
+
+				this.get('#/home', function() {
+					this.swap('include/landing.html');
+				});
+
+				this.get('#/logic', function() {
+					this.swap('include/logic.html');
+				});
+
+				this.get('#/debug', function() {
+					this.swap('include/debug.html');
+				});
+
+				this.get('#/login', function() {
+					this.swap('include/login.html');
+				});
+
+				this.swap = function(content, callback) {
+					var context = this;
+					context.$element().fadeOut('slow', function() {
+						context.$element().load(content, function(){
+							context.$element().fadeIn('slow');
+						});
+					});
+				};
+			});
+
+			// Start sammy app
+			$(function() {
+				app.run('#/home');
+			});
+
+		})(jQuery);
+	</script>
 
 </body>
 
