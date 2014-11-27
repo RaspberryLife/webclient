@@ -194,6 +194,7 @@ function sendInstructionMessage() {
 		// Append message to log
 		function appendToLog(logmsg) {
 			log.value += getCurrentTime() + "> " + logmsg + "\n";
+			log.scrollTop = log.scrollHeight;
 		}
 
 		// Clear log on reload
