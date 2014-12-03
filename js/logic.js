@@ -76,7 +76,11 @@ interact('.dropzone').dropzone({
         //event.relatedTarget.textContent = 'Dragged out';
     },
     ondrop: function (event) {
-        //event.relatedTarget.textContent = 'Dropped';
+        var draggableElement = event.relatedTarget,
+            dropzoneElement = event.target;
+
+			console.log(draggableElement.id + " dropped into " + dropzoneElement.id);
+
     },
     ondropdeactivate: function (event) {
         // remove active dropzone feedback
