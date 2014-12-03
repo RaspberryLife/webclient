@@ -96,15 +96,13 @@ function getCurrentTime() {
 // Send protobuf plainText message
 function sendPlainTextMessage() {
 	if (socket.readyState === WebSocket.OPEN) {
-		message = new RBLMessage({
-			"id": clientID,
-			"messageType": "PLAIN_TEXT",
-			"messageFlag": "REQUEST",
-			"messageNumber": "1337",
-			"plainText": {
-				"text": plainText.value
-			}
-		});
+		msgType = "PLAIN_TEXT";
+		msgFlag = "REQUEST";
+		msgNumber = "1337";
+		plainTextValue = plainText.value;
+
+		message = buildPlainTextMessage(clientID, msgType, msgFlag, msgNumber, plainTextValue);
+		appendToLog("AAA" + JSON.stringify(message));
 
 		socket.send(message.toArrayBuffer());
 		appendToLog("Message sent: " + message.plainText.text);
