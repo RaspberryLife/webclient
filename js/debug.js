@@ -20,9 +20,8 @@ var field = document.getElementById("field");
 var count = document.getElementById("count");
 var startDate = document.getElementById("startDate");
 var endDate = document.getElementById("endDate");
-var clientID = "webclient v0.2";
+var clientID = "webclient v0.4";
 var log = document.getElementById("log");
-var message;
 var messageID;
 var messageType;
 var messageFlag;
@@ -96,12 +95,12 @@ function getCurrentTime() {
 // Send protobuf plainText message
 function sendPlainTextMessage() {
 	if (socket.readyState === WebSocket.OPEN) {
-		msgType = "PLAIN_TEXT";
-		msgFlag = "REQUEST";
-		msgNumber = "1337";
-		plainTextValue = plainText.value;
+		var msgType = "PLAIN_TEXT";
+		var msgFlag = "REQUEST";
+		var msgNumber = "51";
+		var plainTextValue = plainText.value;
 
-		message = buildPlainTextMessage(clientID, msgType, msgFlag, msgNumber, plainTextValue);
+		var message = buildPlainTextMessage(clientID, msgType, msgFlag, msgNumber, plainTextValue);
 		appendToLog("AAA" + JSON.stringify(message));
 
 		socket.send(message.toArrayBuffer());
@@ -113,24 +112,14 @@ function sendPlainTextMessage() {
 
 function sendGetDataMessage() {
 	if (socket.readyState === WebSocket.OPEN) {
-		message = new RBLMessage({
-			"id": clientID,
-			"messageType": "GET_DATA",
-			"messageFlag": "REQUEST",
-			"messageNumber": "1337",
-			"getData": {
-				"actuator": {
-					"actuatorType": actuatorType.value,
-					"actuatorId": actuator.value
-				},
-				"fieldId": field.value,
-				"range": {
-					"count": count.value,
-					"startDateTime": startDate.value,
-					"endDateTime": endDate.value
-				}
-			}
-		});
+		var msgType = "GET_DATA";
+		var msgFlag = "REQUEST";
+		var msgNumber = "52";
+		var acType = actuatorType.value;
+		var actID = actuator.value;
+		var fieldId = field.value;
+
+		var message = buildGetDataMessage(clientID, msgType, msgFlag, msgNumber, actType, actID, fieldID)
 
 		socket.send(message.toArrayBuffer());
 		appendToLog("Get Data Request sent");
@@ -162,6 +151,8 @@ function sendInstructionMessage() {
 					}
 				});
 
+				appendToLog("AAA" + JSON.stringify(message));
+
 				socket.send(message.toArrayBuffer());
 				appendToLog("Instruction sent");
 			} else {
@@ -172,15 +163,15 @@ function sendInstructionMessage() {
 		// Send authentication request
 		function sendAuthRequestMessage() {
 			if (socket.readyState == WebSocket.OPEN) {
-				message = new RBLMessage({
-					"id": clientID,
-					"messageType": "AUTH",
-					"messageFlag": "REQUEST",
-					"messageNumber": "1337",
-					"plainText": {
-						"text": authKey.value
-					}
-				});
+				var msgType = "AUTH";
+				var msgFlag = "REQUEST";
+				var msgNumber = "50";
+				var plainTextValue = authKey.value;
+
+				var message = buildPlainTextMessage(clientID, msgType, msgFlag, msgNumber, plainTextValue);
+
+				appendToLog("AAA" + JSON.stringify(message));
+
 
 				socket.send(message.toArrayBuffer());
 				appendToLog("Authentication Request Sent");
