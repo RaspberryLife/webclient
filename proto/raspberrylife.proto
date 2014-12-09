@@ -24,9 +24,7 @@ message RBLMessage {
 	optional Logic logic = 32;
 
 	// Range 51 - 70 : Data operation messages
-	optional GetData getData = 51;
-	optional SetData setData = 52;
-	optional Data data = 53;
+	optional DataSet dataSet = 51;
 
 
 	// =============================================================================
@@ -40,20 +38,29 @@ message RBLMessage {
 	}
 
 	enum MessageType {
-		PLAIN_TEXT = 0;
-		RUN_INSTRUCTION = 1;
-		GET_DATA = 2;
-		SET_DATA = 3;
-		DATA = 4;
-		LOGIC = 5;
+		AUTH = 0;
+		PLAIN_TEXT = 1;
+		RUN_INSTRUCTION = 2;
+		DATASET = 3;
+		LOGIC = 4;
 
-		// All authentication messages use PlainText as message content
-		AUTH = 6;
 	}
 
 	enum ModuleType{
-		MODULE_TEMP = 0;
-		MODULE_OUTLET = 1;
+		MODULE_OUTLET = 0;
+		MODULE_TEMP = 1;
+		MODULE_PIR = 3;
+		MODULE_REED = 2;
+		MODULE_LUMINOSITY = 4;
+		MODULE_RELAY = 5;
+		MODULE_PIR_AND_RELAY = 6;
+	}
+
+	enum CrudType {
+		CREATE = 0;
+		RETRIEVE = 1;
+		UPDATE = 2;
+		DELETE = 3;
 	}
 
 	enum ActuatorType {
@@ -63,10 +70,13 @@ message RBLMessage {
 	}
 
 	enum DataType {
-		INTEGER = 0;
-		FLOAT = 1;
-		STRING = 2;
+		MODULE_LIST = 0;
+		MODULE_DATA = 1;
+		SYSTEM_DATA = 2;
+		CLIENT_LIST = 3;
+		CLIENT_DATA = 4;
 	}
+
 	// =============================================================================
 	// General
 	// =============================================================================
@@ -76,6 +86,12 @@ message RBLMessage {
 		required string text = 1;
 	}
 
+	message Actuator {
+		required ActuatorType actuatorType = 1;
+		required int32 actuatorId = 2;
+		optional string name  = 3;
+	}
+
 	// =============================================================================
 	// Instruction subtypes
 	// =============================================================================
@@ -83,8 +99,7 @@ message RBLMessage {
 	message Instruction {
 		// Name of the instruction
 		required int32 instructionId = 1;
-		repeated string stringParameters = 2;
-		repeated int32 intParameters = 3;
+		repeated string parameters = 2;
 
 		// Module
 		optional ModuleType moduleType = 20;
@@ -96,22 +111,20 @@ message RBLMessage {
 		required Instruction instruction = 2;
 	}
 
-
-
 	// =============================================================================
 	// Logic subtypes
 	// =============================================================================
 
 	message Logic {
-		required string name = 1;
-		required Actuator initiator = 2;
-		required Actuator receiver = 3;
-		required Condition condition = 4;
-	}
+		required CrudType crudType = 1;
+		required string name = 2;
+		// Every condition will be mapped to an initiator
+		repeated Actuator initiator = 3;
+		repeated Condition condition = 4;
 
-	message Actuator {
-		required ActuatorType actuatorType = 1;
-		required int32 actuatorId = 2;
+		// Every trigger will be mapped to a receiver
+		repeated Actuator receiver = 5;
+		repeated Trigger trigger = 6;
 	}
 
 	message Condition {
@@ -121,41 +134,41 @@ message RBLMessage {
 		optional bool state = 4;
 	}
 
+	message Trigger {
+		required int32 instructionId = 1;
+		repeated string parameters = 2;
+	}
+
 	// =============================================================================
 	// Data subtypes
 	// =============================================================================
 
-	message SetData {
-		required Actuator actuator = 1;
-		required int32 fieldId = 2;
-		required Data data = 3;
-	}
-
-	message GetData {
-		required Actuator actuator = 1;
-		required int32 fieldId = 2;
-		optional Range range = 3;
-	}
 
 	message Range {
 		// Leaving this empty will result in a fixed number of results e.g. 50
 		optional int32 count = 1;
-
 		// Specify date as follows: "YYYY-MM-DD hh:mm:ss"
 		optional string startDateTime = 2;
-
 		// Same as startDateTime
 		optional string endDateTime = 3;
 	}
 
-	message Data {
-		required int32 fieldId = 1;
+	message DataSet {
+		required CrudType crudType = 1;
 		required DataType dataType = 2;
-		repeated string stringData = 3;
-		repeated int32 int32Data = 4;
-		repeated float floatData = 5;
+		optional Actuator actuator = 3;
+		optional int32 fieldId = 4;
+		optional Range range = 5;	
+		optional Data data = 6;
 	}
 
 
+
+	message Data {
+		repeated Actuator actuators = 1;
+		repeated string stringData = 2;
+		repeated int32 int32Data = 3;
+		repeated float floatData = 4;
+	}
 
 	} // Close RBLMessage

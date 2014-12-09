@@ -81,6 +81,12 @@ interact('.dropzone').dropzone({
 
 			console.log(draggableElement.id + " dropped into " + dropzoneElement.id);
 
+			$('#'+draggableElement.id).appendTo('#IF-dropzone');
+			$('#'+draggableElement.id).removeAttr('style');
+			$('#'+draggableElement.id).attr('data-x', 0);
+			$('#'+draggableElement.id).attr('data-y', 0);
+
+
     },
     ondropdeactivate: function (event) {
         // remove active dropzone feedback

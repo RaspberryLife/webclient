@@ -32,8 +32,8 @@
     border: solid 2px rgba(0, 0, 0, 0.6);
 		border-radius: 4px;
 
-		position: absolute;
-		z-index: 1;
+		<!-- position: absolute;
+		z-index: 1; -->
 
     -webkit-transform: translate(0px, 0px);
             transform: translate(0px, 0px);
