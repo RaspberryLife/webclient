@@ -25,10 +25,10 @@ function buildPlainTextMessage(clientID, msgType, msgFlag, msgNumber, plainTextV
 	return plainTextMessage;
 }
 
-function buildRunInstructionMessage(clientID, msgType, msgFlag, msgNumber, actType, actID, insID) {
+function buildRunInstructionMessage(clientID, msgType, msgFlag, msgNumber, actType, actID, insId, params, modType, modId) {
 	var baseMessage = buildBaseMessage(clientID, msgType, msgFlag, msgNumber);
 	var actuatorMessage = buildActuatorMessage(actType, actID);
-	var instructionMessage = buildInstructionMessage(insID);
+	var instructionMessage = buildInstructionMessage(insId, params, modType, modId);
 
 	var runInstructionMessage = $.extend(baseMessage, actuatorMessage, instructionMessage);
 
@@ -45,9 +45,12 @@ return actuatorMessage;
 }
 
 
-function buildInstructionMessage(insID) {
+function buildInstructionMessage(insId, params, modType, modId) {
 	var instructionMessage = {
-			"instructionId": insID
+			"instructionId": insId,
+			"parameters": params,
+			"moduleType": modType,
+			"moduleId": modId
 		};
 
 return instructionMessage;

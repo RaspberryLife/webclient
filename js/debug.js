@@ -15,7 +15,7 @@ var actuatorType2 = document.getElementById("actuatorType2");
 var instructionID = document.getElementById("instructionId");
 var moduleType = document.getElementById("moduleType");
 var moduleID = document.getElementById("moduleID");
-var intParam = document.getElementById("intParam");
+var parameters = document.getElementById("parameters");
 var field = document.getElementById("field");
 var count = document.getElementById("count");
 var startDate = document.getElementById("startDate");
@@ -101,6 +101,7 @@ function sendPlainTextMessage() {
 		var plainTextValue = plainText.value;
 
 		var message = buildPlainTextMessage(clientID, msgType, msgFlag, msgNumber, plainTextValue);
+
 		appendToLog("AAA" + JSON.stringify(message));
 
 		socket.send(message.toArrayBuffer());
@@ -112,14 +113,14 @@ function sendPlainTextMessage() {
 
 function sendGetDataMessage() {
 	if (socket.readyState === WebSocket.OPEN) {
-		var msgType = "GET_DATA";
+		var msgType = "DATASET";
 		var msgFlag = "REQUEST";
 		var msgNumber = "52";
-		var acType = actuatorType.value;
+		var actType = actuatorType.value;
 		var actID = actuator.value;
 		var fieldId = field.value;
 
-		var message = buildGetDataMessage(clientID, msgType, msgFlag, msgNumber, actType, actID, fieldID)
+		var message = buildGetDataMessage(clientID, msgType, msgFlag, msgNumber, actType, actID, fieldID);
 
 		socket.send(message.toArrayBuffer());
 		appendToLog("Get Data Request sent");
@@ -130,26 +131,18 @@ function sendGetDataMessage() {
 
 function sendInstructionMessage() {
 	if (socket.readyState === WebSocket.OPEN) {
-				var intParams = [];
-				intParams.push(intParam.value);
-				message = new RBLMessage({
-					"id": clientID,
-					"messageType": "RUN_INSTRUCTION",
-					"messageFlag": "REQUEST",
-					"messageNumber": "1337",
-					"runInstruction": {
-						"actuator": {
-							"actuatorType": actuatorType2.value,
-							"actuatorId": actuator2.value,
-						},
-						"instruction": {
-							"instructionId": instructionID.value,
-							"intParameters": intParams,
-							"moduleType": moduleType.value,
-							"moduleId": moduleID.value
-						}
-					}
-				});
+
+		var msgType = "RUN_INSTRUCTION";
+		var msgFlag = "REQUEST";
+		var msgNumber = "53";
+		var actType = actuatorType2.value;
+		var actID = actuator2.value;
+		var insId = instructionID.value;
+		var params = parameters.value;
+		var	modType = moduleType.value;
+		var	modId = moduleID.value;
+
+		var message = buildRunInstructionMessage(clientID, msgType, msgFlag, msgNumber, actType, actID, insId, params, modType, modId)
 
 				appendToLog("AAA" + JSON.stringify(message));
 
