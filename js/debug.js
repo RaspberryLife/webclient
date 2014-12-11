@@ -102,7 +102,7 @@ function sendPlainTextMessage() {
 
 		var message = buildPlainTextMessage(clientID, msgType, msgFlag, msgNumber, plainTextValue);
 
-		appendToLog("AAA" + JSON.stringify(message));
+		appendToLog("Message: " + JSON.stringify(message));
 
 		socket.send(message.toArrayBuffer());
 		appendToLog("Message sent: " + message.plainText.text);
@@ -118,7 +118,7 @@ function sendGetDataMessage() {
 		var msgNumber = "52";
 		var actType = actuatorType.value;
 		var actID = actuator.value;
-		var fieldId = field.value;
+		var fieldID = field.value;
 
 		var message = buildGetDataMessage(clientID, msgType, msgFlag, msgNumber, actType, actID, fieldID);
 
@@ -144,7 +144,7 @@ function sendInstructionMessage() {
 
 		var message = buildRunInstructionMessage(clientID, msgType, msgFlag, msgNumber, actType, actID, insId, params, modType, modId)
 
-				appendToLog("AAA" + JSON.stringify(message));
+				appendToLog("Message: " + JSON.stringify(message));
 
 				socket.send(message.toArrayBuffer());
 				appendToLog("Instruction sent");
@@ -163,7 +163,7 @@ function sendInstructionMessage() {
 
 				var message = buildPlainTextMessage(clientID, msgType, msgFlag, msgNumber, plainTextValue);
 
-				appendToLog("AAA" + JSON.stringify(message));
+				appendToLog("Message: " + JSON.stringify(message));
 
 
 				socket.send(message.toArrayBuffer());
