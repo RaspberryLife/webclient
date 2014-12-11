@@ -80,13 +80,13 @@ interact('.dropzone').dropzone({
         var draggableElement = event.relatedTarget,
             dropzoneElement = event.target;
 
-				console.log(draggableElement.id + " dropped into " + dropzoneElement.id);
-
 				$('#'+draggableElement.id).appendTo('#' + dropzoneElement.id);
 				$('#'+draggableElement.id).removeAttr('style');
 				$('#'+draggableElement.id).attr('data-x', 0);
 				$('#'+draggableElement.id).attr('data-y', 0);
 
+				console.log(draggableElement.id + " dropped into " + dropzoneElement.id);
+				console.log(draggableElement.id + " switch status: " + dropzoneElement.id);
 
     },
     ondropdeactivate: function (event) {
@@ -95,3 +95,9 @@ interact('.dropzone').dropzone({
         event.target.classList.remove('drop-target');
     }
 });
+
+$(function() {
+			$(':input').change(function() {
+				console.log(this.id + " Toggle: " + $(this).prop('checked'));
+			})
+		})
