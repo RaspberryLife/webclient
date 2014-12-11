@@ -30,16 +30,58 @@ function buildRunInstructionMessage(clientID, msgType, msgFlag, msgNumber, actTy
 	var actuatorMessage = buildActuatorMessage(actType, actID);
 	var instructionMessage = buildInstructionMessage(insId, params, modType, modId);
 
-	var runInstructionMessage = $.extend(baseMessage, actuatorMessage, instructionMessage);
+	var prefix = "{\"runInstruction\":";
+	var suffix = "}";
 
-	return runInstructionMessage;
+	var runInstruction = {};
+			console.log(runInstruction);
+
+	var runInstructionMessage = $.extend(runInstruction, actuatorMessage, instructionMessage);
+				console.log(runInstruction);
+
+	var test2 = $.extend(baseMessage, runInstructionMessage);
+
+		console.log(test2);
+
+
+	var noobstring = new RBLMessage({
+			"id": clientID,
+			"messageType": msgType,
+			"messageFlag": msgFlag,
+			"messageNumber": msgNumber,
+
+		"runInstruction":
+			{
+
+				"actuator":
+					{
+						"actuatorType": actType,
+						"actuatorId": actID
+					},
+
+				"instruction":
+						{
+						"instructionId": insId,
+						"parameters": params,
+						"moduleType": modType,
+						"moduleId": modId
+						}
+			}
+		});
+
+	console.log(noobstring);
+	return noobstring;
+	//return runInstructionMessage;
 }
 
 function buildActuatorMessage(actType, actID) {
 	var actuatorMessage = {
-			"actuatorType": actType,
-			"actuatorId": actID
-		};
+		"actuator":
+			{
+				"actuatorType": actType,
+				"actuatorId": actID
+			}
+	};
 
 return actuatorMessage;
 }
@@ -47,11 +89,14 @@ return actuatorMessage;
 
 function buildInstructionMessage(insId, params, modType, modId) {
 	var instructionMessage = {
-			"instructionId": insId,
-			"parameters": params,
-			"moduleType": modType,
-			"moduleId": modId
-		};
+		"instruction":
+				{
+				"instructionId": insId,
+				"parameters": params,
+				"moduleType": modType,
+				"moduleId": modId
+				}
+	};
 
 return instructionMessage;
 }

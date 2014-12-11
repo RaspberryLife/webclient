@@ -20,7 +20,7 @@ var field = document.getElementById("field");
 var count = document.getElementById("count");
 var startDate = document.getElementById("startDate");
 var endDate = document.getElementById("endDate");
-var clientID = "webclient v0.4";
+var clientID = "webclient v0.5";
 var log = document.getElementById("log");
 var messageID;
 var messageType;
@@ -138,7 +138,8 @@ function sendInstructionMessage() {
 		var actType = actuatorType2.value;
 		var actID = actuator2.value;
 		var insId = instructionID.value;
-		var params = parameters.value;
+		var paramsstr = parameters.value;
+		var params = paramsstr.split(',');
 		var	modType = moduleType.value;
 		var	modId = moduleID.value;
 
