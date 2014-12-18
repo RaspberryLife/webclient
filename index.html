@@ -78,13 +78,13 @@
 							<a href="#"><i class="fa fa-home fa-fw"></i> Rooms<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li>
-									<a href="#/room/1">Room 1</a>
+									<a href="#/rooms/1">Room 1</a>
 								</li>
 								<li>
-									<a href="#/room/2">Room 2</a>
+									<a href="#/rooms/2">Room 2</a>
 								</li>
 								<li>
-									<a href="#/room/fablab">FabLab</a>
+									<a id="fablab" href="#/fablab">FabLab</a>
 								</li>
 							</ul>
                             <li>
@@ -139,6 +139,13 @@
 					jQuery('#home').addClass('active');
 				});
 
+				this.get('#/fablab', function() {
+									$('#side-menu li a').removeClass('active');
+					$('#fablab').addClass('active');
+
+					this.swap('include/fablab.html');
+				});
+				
 				this.get('#/logic', function() {
 									$('#side-menu li a').removeClass('active');
 					$('#logic').addClass('active');

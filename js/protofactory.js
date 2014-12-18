@@ -33,18 +33,18 @@ function buildRunInstructionMessage(clientID, msgType, msgFlag, msgNumber, actTy
 	var prefix = "{\"runInstruction\":";
 	var suffix = "}";
 
-	var runInstruction = {};
+	var runInstruction = { 
+		runInstruction: {
+			actuator: {}
+		}
+	};
 			console.log(runInstruction);
 
-	var runInstructionMessage = $.extend(runInstruction, actuatorMessage, instructionMessage);
-				console.log(runInstruction);
-
+	var runInstructionMessage = $.extend(runInstruction.actuator, actuatorMessage, instructionMessage);
+	
 	var test2 = $.extend(baseMessage, runInstructionMessage);
-
-		console.log(test2);
-
-
-	var noobstring = new RBLMessage({
+	
+	var test = new RBLMessage({
 			"id": clientID,
 			"messageType": msgType,
 			"messageFlag": msgFlag,
@@ -69,8 +69,8 @@ function buildRunInstructionMessage(clientID, msgType, msgFlag, msgNumber, actTy
 			}
 		});
 
-	console.log(noobstring);
-	return noobstring;
+	console.log(test);
+	return test;
 	//return runInstructionMessage;
 }
 

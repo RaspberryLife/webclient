@@ -34,20 +34,17 @@ var testFloat1;
 var socket;
 
 
-// Default socket IP
-//var socketIP = "localhost";
-
 // Connect to websocket
 function createWebSocket(socketIP) {
 	socket = new WebSocket("ws://" + socketIP + ":6680/websocket-echo");
 	socket.binaryType = "arraybuffer";
 
 	socket.onopen = function () {
-		appendToLog("Connected");
+		console.log("Connected");
 	};
 
 	socket.onclose = function () {
-		appendToLog("Disconnected");
+		console.log("Disconnected");
 	};
 
 	socket.onmessage = function (message) {
@@ -66,20 +63,8 @@ function createWebSocket(socketIP) {
 			endDateTime = message.data.endDateTime;
 			testFloat1 = message.data.data;
 
-			appendToLog("Message ID: " + messageID);
-			appendToLog("Message Type: " + messageType);
-			appendToLog("Message Flag: " + messageFlag);
-			appendToLog("Field ID: " + fieldID);
-			appendToLog("Data Type: " + dataType);
-			appendToLog("String Data: " + stringData);
-			appendToLog("Int32 Data: " + int32Data);
-			appendToLog("Float Data: " + floatData);
-			appendToLog("Datum von: " + startDateTime);
-			appendToLog("Datum bis: " + endDateTime);
-			appendToLog("Object type: " + Object.prototype.toString.call(testFloat1));
-			appendToLog("data array length: " + testFloat1.length);
 		} catch (err) {
-			appendToLog("Error: " + err);
+			console.error("Error: " + err);
 		}
 	};
 }
@@ -99,13 +84,8 @@ function sendPlainTextMessage() {
 		var plainTextValue = plainText.value;
 
 		var message = buildPlainTextMessage(clientID, msgType, msgFlag, msgNumber, plainTextValue);
-
-		appendToLog("Message: " + JSON.stringify(message));
-
+		
 		socket.send(message.toArrayBuffer());
-		appendToLog("Message sent: " + message.plainText.text);
-	} else {
-		appendToLog("Not connected");
 	}
 }
 
@@ -121,62 +101,33 @@ function sendGetDataMessage() {
 		var message = buildGetDataMessage(clientID, msgType, msgFlag, msgNumber, actType, actID, fieldID);
 
 		socket.send(message.toArrayBuffer());
-		appendToLog("Get Data Request sent");
-	} else {
-		appendToLog("Not connected");
-	}
+	} 
 }
 
-function sendInstructionMessage() {
+function sendInstructionMessage(clientID, msgType, msgFlag, msgNumber, actType, actID, insId, params, modType, modId) {
 	if (socket.readyState === WebSocket.OPEN) {
-
-		var msgType = "RUN_INSTRUCTION";
-		var msgFlag = "REQUEST";
-		var msgNumber = "53";
-		var actType = actuatorType2.value;
-		var actID = actuator2.value;
-		var insId = instructionID.value;
-		var paramsstr = parameters.value;
-		var params = paramsstr.split(',');
-		var	modType = moduleType.value;
-		var	modId = moduleID.value;
 
 		var message = buildRunInstructionMessage(clientID, msgType, msgFlag, msgNumber, actType, actID, insId, params, modType, modId);
 
-				appendToLog("Message: " + JSON.stringify(message));
-
 				socket.send(message.toArrayBuffer());
-				appendToLog("Instruction sent");
-			} else {
-				appendToLog("Not connected");
 			}
 		}
 
-		// Send authentication request
-		function sendAuthRequestMessage(authKey) {
-			if (socket.readyState == WebSocket.OPEN) {
-				var msgType = "AUTH";
-				var msgFlag = "REQUEST";
-				var msgNumber = "50";
-				var plainTextValue = authKey;
+// Send authentication request
+function sendAuthRequestMessage(authKey) {
+	if (socket.readyState == WebSocket.OPEN) {
+		var clientID = "webclient v0.6";
+		var msgType = "AUTH";
+		var msgFlag = "REQUEST";
+		var msgNumber = "50";
+		var plainTextValue = authKey;
+		
+		console.log("AAAAAAAAAAAAA");
 
-				var message = buildPlainTextMessage(clientID, msgType, msgFlag, msgNumber, plainTextValue);
+		var message = buildPlainTextMessage(clientID, msgType, msgFlag, msgNumber, plainTextValue);
 
-				appendToLog("Message: " + JSON.stringify(message));
+		socket.send(message.toArrayBuffer());
+	} 
+}
 
 
-				socket.send(message.toArrayBuffer());
-				appendToLog("Authentication Request Sent");
-			} else {
-				appendToLog("Not connected");
-			}
-		}
-
-		// Append message to log
-		function appendToLog(logmsg) {
-			log.value += getCurrentTime() + "> " + logmsg + "\n";
-			log.scrollTop = log.scrollHeight;
-		}
-
-		// Clear log on reload
-		log.value = "";

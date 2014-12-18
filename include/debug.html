@@ -6,10 +6,10 @@
 							<h1 class="page-header">Debug console</h1>
 							<br>Socket IP: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<input id="socketIP" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="12" type="socketip" value="localhost">
-							<button onclick="createWebSocket()">Connect</button>
+							<button onclick="createWebSocket(document.getElementById('socketIP').value)">Connect</button>
 							<br> Authentication key:
 							<input id="authKey" onblur="if (this.value=='') this.value=this.defaultValue" onclick="if (this.defaultValue==this.value) this.value=''" size="12" type="authKey" value="abc12345">
-							<button onclick="sendAuthRequestMessage()">Send auth request</button>
+							<button onclick="sendAuthRequestMessage(document.getElementById('authKey').value)">Send auth request</button>
 							<br>
 							<br>
 
