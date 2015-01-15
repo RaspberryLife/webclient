@@ -60,7 +60,7 @@
 					<ul class="dropdown-menu dropdown-user">
 						<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
 						</li>
-						<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+						<li><a href="#/settings"><i class="fa fa-gear fa-fw"></i> Settings</a>
 						</li>
 						<li class="divider"></li>
 						<li><a href="#/login"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -159,6 +159,10 @@
 					this.swap('include/debug.html');
 									$('#side-menu li a').removeClass('active');
 					$('#debug').addClass('active');
+				});
+
+				this.get('#/settings', function() {
+					this.swap('include/settings.html');
 				});
 
 				this.get('#/login', function() {
