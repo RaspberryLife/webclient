@@ -1,10 +1,10 @@
 #IF-dropzone {
-    height: 200px;
+    height: 300px;
 	  background-color: #dff4ff;
 }
 
 #THEN-dropzone {
-    height: 200px;
+    height: 300px;
 	  background-color: #fffdc9;
 		border-left:  0px;
 }

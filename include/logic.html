@@ -43,17 +43,19 @@
       <h4>Modules</h4>
 			<div class="col-lg-12">
 			<div class="draggable drag-drop" id="module1">
-				Module 1
+				Outlet 1
 				<input id="module1-toggle" type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger">
 			</div>
 			<div class="draggable drag-drop" id="module2">
-				Module 2
+				Temperature
 				<div id="slider-range"></div>
 				<div id="slider-range-value">Value: </div>
 			</div>
 			<div class="draggable drag-drop" id="module3">
-				Module 3
-				<input id="module3-toggle" type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger">
+				Temperature range
+				<div id="slider-handles"></div>
+				<div id="slider-handles-lower">Value: </div>
+				<div id="slider-handles-upper">Value: </div>
 			</div>
 				</div>
     </div>
@@ -91,5 +93,24 @@
 	})
 });
 		$('#slider-range').Link('lower').to($('#slider-range-value'));
+		</script>
+
+		<script> $('#slider-handles').noUiSlider({
+	start: [20,30],
+	step: 0.1,
+	connect: true,
+	orientation: "horizontal",
+	range: {
+		'min': 10,
+		'max': 40
+	},
+	format: wNumb({
+		decimals: 1,
+		thousand: '.',
+		postfix: ' °C',
+	})
+});
+		$('#slider-handles').Link('lower').to($('#slider-handles-lower'));
+		$('#slider-handles').Link('upper').to($('#slider-handles-upper'));
 		</script>
 </html>
