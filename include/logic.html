@@ -48,7 +48,8 @@
 			</div>
 			<div class="draggable drag-drop" id="module2">
 				Module 2
-				<input id="module2-toggle" type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger">
+				<div id="slider-range"></div>
+				<div id="slider-range-value">Value: </div>
 			</div>
 			<div class="draggable drag-drop" id="module3">
 				Module 3
@@ -70,6 +71,25 @@
 	<script src="js/logic.js"></script>
 	<!-- Logic Parser JavaScript -->
 	<script src="js/logicparser.js"></script>
+	<script src="js/plugins/noUiSlider/jquery.nouislider.all.min.js"></script>
 	<!-- Bootstrap Toggles JavaScript -->
 	<script src="js/plugins/toggles/bootstrap-toggle.min.js"></script>
+
+		<script> $('#slider-range').noUiSlider({
+	start: 20,
+	step: 0.1,
+	connect: "lower",
+	orientation: "horizontal",
+	range: {
+		'min': 10,
+		'max': 40
+	},
+	format: wNumb({
+		decimals: 1,
+		thousand: '.',
+		postfix: ' °C',
+	})
+});
+		$('#slider-range').Link('lower').to($('#slider-range-value'));
+		</script>
 </html>
