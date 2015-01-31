@@ -29,22 +29,8 @@ function buildRunInstructionMessage(clientID, msgType, msgFlag, msgNumber, actTy
 	var baseMessage = buildBaseMessage(clientID, msgType, msgFlag, msgNumber);
 	var actuatorMessage = buildActuatorMessage(actType, actID);
 	var instructionMessage = buildInstructionMessage(insId, params, modType, modId);
-
-	var prefix = "{\"runInstruction\":";
-	var suffix = "}";
-
-	var runInstruction = { 
-		runInstruction: {
-			actuator: {}
-		}
-	};
-			console.log(runInstruction);
-
-	var runInstructionMessage = $.extend(runInstruction.actuator, actuatorMessage, instructionMessage);
 	
-	var test2 = $.extend(baseMessage, runInstructionMessage);
-	
-	var test = new RBLMessage({
+	var runInstructionMessage = new RBLMessage({
 			"id": clientID,
 			"messageType": msgType,
 			"messageFlag": msgFlag,
@@ -69,9 +55,8 @@ function buildRunInstructionMessage(clientID, msgType, msgFlag, msgNumber, actTy
 			}
 		});
 
-	console.log(test);
-	return test;
-	//return runInstructionMessage;
+	console.log("RUNINSTRUCTIONMESSAGE: " + runInstructionMessage);
+	return runInstructionMessage;
 }
 
 function buildActuatorMessage(actType, actID) {
@@ -127,7 +112,65 @@ function buildSetDataMessage(clientID, msgType, msgFlag, msgNumber, actType, act
 	return setDataMessage;
 }
 
+function buildLogicMessage(clientID, msgType, msgFlag, msgNumber, actType, actID, insId, params, modType, modId) {
+	var logicInitiatorMessage = new RBLMessage({
+			"id": "webclient_logic",
+			"messageType": "LOGIC",
+			"messageFlag": "REQUEST",
+			"messageNumber": "234",
 
+		"logic":
+			{
+				"crudType": "0",
+				"id": "52",
+				"name": "testlogic1",
+
+				"exeFrequency":
+				{
+						"exeType": "IMMEDIATELY"
+					},
+
+				"exeRequirement": "SINGLE",
+
+				"logicInitiator":
+					{
+
+						"initiator":
+							{
+								"actuatorType": "MODULE",
+								"actuatorId": "22"
+							},
+
+						"condition":
+								{
+								"fieldId": "1",
+								"state": "true"
+								}
+					},
+
+				"logicReceiver":
+					{
+
+						"receiver":
+							{
+								"actuatorType": "MODULE",
+								"actuatorId": "25"
+							},
+
+						"instruction":
+								{
+								"instructionId": "51",
+								"parameters": "",
+								"moduleType": "MODULE_OUTLET",
+								"moduleId": "23"
+								}
+					}
+			}
+		});
+
+	console.log("RUNINSTRUCTIONMESSAGE: " + logicInitiatorMessage);
+	return logicInitiatorMessage;
+}
 
 function buildDataMessage(fieldID, dataType, stringData, int32Data, floatData) {
 	dataMessage = {
