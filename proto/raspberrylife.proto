@@ -25,6 +25,7 @@ message RBLMessage {
 
 	// Range 51 - 70 : Data operation messages
 	optional DataSet dataSet = 51;
+	optional User user = 52;
 
 
 	// =============================================================================
@@ -124,6 +125,16 @@ message RBLMessage {
 	message RunInstruction {
 		required Actuator actuator = 1;
 		required Instruction instruction = 2;
+	}
+
+	// =============================================================================
+	// User subtypes
+	// =============================================================================
+
+	message User {
+		required CrudType crudType = 1;
+		required int32 id = 2;
+		optional string name = 3;
 	}
 
 	// =============================================================================
