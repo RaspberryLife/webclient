@@ -112,7 +112,7 @@ function buildSetDataMessage(clientID, msgType, msgFlag, msgNumber, actType, act
 	return setDataMessage;
 }
 
-function buildLogicMessage(clientID, msgType, msgFlag, msgNumber, actType, actID, insId, params, modType, modId) {
+function buildLogicMessage(clientID, msgType, msgFlag, msgNumber, crudType, logicId, logicName, exeType, exeReq, initType, initId, conFieldId, conState, recType, recId, insId, params, modType, modId) {
 	var logicInitiatorMessage = new RBLMessage({
 			"id": "webclient_logic",
 			"messageType": "LOGIC",
@@ -123,7 +123,7 @@ function buildLogicMessage(clientID, msgType, msgFlag, msgNumber, actType, actID
 			{
 				"crudType": "0",
 				"id": "52",
-				"name": "testlogic1",
+				"name": logicName,
 
 				"exeFrequency":
 				{
