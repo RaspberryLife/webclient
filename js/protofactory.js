@@ -138,13 +138,13 @@ function buildLogicMessage(clientID, msgType, msgFlag, msgNumber, crudType, logi
 						"initiator":
 							{
 								"actuatorType": "MODULE",
-								"actuatorId": "22"
+								"actuatorId": initId
 							},
 
 						"condition":
 								{
-								"fieldId": "1",
-								"state": "true"
+								"fieldId": conFieldId,
+								"state": conState
 								}
 					},
 
@@ -154,14 +154,14 @@ function buildLogicMessage(clientID, msgType, msgFlag, msgNumber, crudType, logi
 						"receiver":
 							{
 								"actuatorType": "MODULE",
-								"actuatorId": "25"
+								"actuatorId": recId
 							},
 
 						"instruction":
 								{
 								"instructionId": "51",
 								"parameters": "",
-								"moduleType": "MODULE_OUTLET",
+								"moduleType": modType,
 								"moduleId": "23"
 								}
 					}

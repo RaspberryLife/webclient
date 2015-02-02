@@ -10,8 +10,7 @@ savebtn.addEventListener('click', function() {
 		parseInitiatorModules(in_modules);
 		parseReceiverModules(out_modules);
 		logicName = document.getElementById('logic-name').value;
-		//buildLogicMessage();
-		wsSendLogicMessage(logicName);
+		wsSendLogicMessage(logicName, initId, modType, conFieldId, conState, recId, modType);
 }, false);
 
 
@@ -38,26 +37,26 @@ function createReceiverModulesArray () {
 function parseInitiatorModules (in_modules) {
 	i=0;
 		$.each(in_modules, function( index, value ) {
-			//if (value[index].getAttribute("data-mtype") == "outlet"){
-			//in_modules[i] = value[0].getAttribute("id");
 			in_modules[i] = value[0];
-
 			initId = in_modules[i].getAttribute("id");
 			modType = in_modules[i].getAttribute("data-mtype");
-			conFieldId = in_modules[i].childNodes[1].getAttribute("type");
-			//.getAttribute("data-field-id");
+			conFieldId = in_modules[i].childNodes[1].firstChild.getAttribute("data-field-id");
+			conState = in_modules[i].childNodes[1].firstChild.checked.toString();
 
-			console.log("DEBUG: " + initId + " " + modType + " " + conFieldId);
 			i++;
 			//	}
 		});
-	console.log("in_modules array: " + in_modules.toString());
 }
 
 function parseReceiverModules (out_modules) {
+	i=0;
 		$.each(out_modules, function( index, value ) {
-			//if (value[index].getAttribute("data-mtype") == "outlet"){
-					console.log("Receiver: " + index + ": " + value[index].getAttribute("id"));
+			out_modules[i] = value[0];
+			recId = out_modules[i].getAttribute("id");
+			modType = out_modules[i].getAttribute("data-mtype");
+
+			console.log("DEBUG: " + initId + " " + modType + " " + conFieldId + " " + conState);
+			i++;
 			//	}
 		});
 }
