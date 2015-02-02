@@ -9,8 +9,9 @@ savebtn.addEventListener('click', function() {
 		createReceiverModulesArray();
 		parseInitiatorModules(in_modules);
 		parseReceiverModules(out_modules);
-		buildLogicMessage();
-		wsSendLogicMessage();
+		logicName = document.getElementById('logic-name').value;
+		//buildLogicMessage();
+		wsSendLogicMessage(logicName);
 }, false);
 
 
@@ -19,7 +20,7 @@ function createInitiatorModulesArray () {
 	$("#IF-dropzone").children(".drag-drop").each(function(){
 		var id = $(this);
 		in_modules.push(id);
-		console.log("Initiator Modules :" + in_modules[i].attr('id'));
+		//console.log("Initiator Modules :" + in_modules[i].attr('id'));
 		i++;
 	});
 }
@@ -35,11 +36,22 @@ function createReceiverModulesArray () {
 }
 
 function parseInitiatorModules (in_modules) {
+	i=0;
 		$.each(in_modules, function( index, value ) {
 			//if (value[index].getAttribute("data-mtype") == "outlet"){
-					console.log("Initiator: " + index + ": " + value[index].getAttribute("id"));
+			//in_modules[i] = value[0].getAttribute("id");
+			in_modules[i] = value[0];
+
+			initId = in_modules[i].getAttribute("id");
+			modType = in_modules[i].getAttribute("data-mtype");
+			conFieldId = in_modules[i].childNodes[1].getAttribute("type");
+			//.getAttribute("data-field-id");
+
+			console.log("DEBUG: " + initId + " " + modType + " " + conFieldId);
+			i++;
 			//	}
 		});
+	console.log("in_modules array: " + in_modules.toString());
 }
 
 function parseReceiverModules (out_modules) {

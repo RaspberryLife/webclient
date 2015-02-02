@@ -18,7 +18,7 @@ var field = document.getElementById("field");
 var count = document.getElementById("count");
 var startDate = document.getElementById("startDate");
 var endDate = document.getElementById("endDate");
-var clientID = "webclient v0.5";
+var clientID = "webclient v0.8";
 var log = document.getElementById("log");
 var messageID;
 var messageType;
