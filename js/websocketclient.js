@@ -54,7 +54,7 @@ function wsSendAuthRequestMessage() {
 	}
 }
 
-function wsSendLogicMessage(logicName) {
+function wsSendLogicMessage(logicName, initId, modType, conFieldId, conState, recId, modType) {
 	if (socket.readyState === WebSocket.OPEN) {
 		var msgType = "LOGIC";
 		var msgFlag = "REQUEST";
