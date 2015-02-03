@@ -138,7 +138,7 @@ function buildLogicMessage(clientID, msgType, msgFlag, msgNumber, crudType, logi
 						"initiator":
 							{
 								"actuatorType": "MODULE",
-								"actuatorId": initId
+								"actuatorId": "234"
 							},
 
 						"condition":
@@ -154,7 +154,7 @@ function buildLogicMessage(clientID, msgType, msgFlag, msgNumber, crudType, logi
 						"receiver":
 							{
 								"actuatorType": "MODULE",
-								"actuatorId": recId
+								"actuatorId": "4564"
 							},
 
 						"instruction":
