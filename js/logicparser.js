@@ -38,7 +38,7 @@ function parseInitiatorModules (in_modules) {
 	i=0;
 		$.each(in_modules, function( index, value ) {
 			in_modules[i] = value[0];
-			initId = in_modules[i].getAttribute("id");
+			initId = in_modules[i].getAttribute("234");
 			modType = in_modules[i].getAttribute("data-mtype");
 			conFieldId = in_modules[i].childNodes[1].firstChild.getAttribute("data-field-id");
 			conState = in_modules[i].childNodes[1].firstChild.checked.toString();
