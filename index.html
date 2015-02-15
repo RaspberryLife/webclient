@@ -55,6 +55,7 @@
 			<ul class="nav navbar-top-links navbar-right">
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<i id="greeting-name">Hello Guest!</i>
 						<i class="fa fa-user fa-fw"></i>	<i class="fa fa-caret-down"></i>
 					</a>
 					<ul class="dropdown-menu dropdown-user">
@@ -132,6 +133,9 @@
 		<!--  Cookie JavaScript -->
 		<script src="js/plugins/cookies/jquery.cookie-1.4.1.min.js"></script>
 
+		<!-- Settings JavaScript -->
+		<script src="js/settings.js" type="text/javascript"></script>
+
 		<!-- ProtoBuf Related JavaScript -->
 		<script src="js/plugins/protobuf/ByteBufferAB.min.js" type="text/javascript"></script>
 		<script src="js/plugins/protobuf/Long.min.js" type="text/javascript"></script>
@@ -198,6 +202,11 @@
 
 		})(jQuery);
 	</script>
+
+	<script type="text/javascript">
+   getUserName();
+</script>
+
 
 </body>
 
