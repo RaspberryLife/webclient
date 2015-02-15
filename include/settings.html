@@ -1,35 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- Settings JavaScript -->
+<script src="js/settings.js" type="text/javascript"></script>
+
+	<script type="text/javascript">
+   restoreSettings();
+</script>
+
 		<div class="row">
   <div class="col-lg-12">
     <h1 class="page-header">Settings</h1>
 		<div class="col-lg-6">
 		<div class="input-group">
   <span class="input-group-addon" id="basic-addon1">First Name</span>
-  <input type="text" class="form-control" placeholder="First Name" aria-describedby="basic-addon1">
+  <input id="firstname" type="text" class="form-control" placeholder="First Name" aria-describedby="basic-addon1">
 </div>
 			</div>
 		<div class="col-lg-6">
 		<div class="input-group">
   <span class="input-group-addon" id="basic-addon1">Last Name</span>
-  <input type="text" class="form-control" placeholder="Last Name" aria-describedby="basic-addon1">
+  <input id="lastname" type="text" class="form-control" placeholder="Last Name" aria-describedby="basic-addon1">
 </div>
 			</div>
+		</br>
+		</br>
 				<div class="col-lg-6">
-
 			<div class="input-group">
   <span class="input-group-addon" id="basic-addon1">E-Mail</span>
-  <input type="text" class="form-control" placeholder="example@example.com" aria-describedby="basic-addon1">
+  <input id="email" type="text" class="form-control" placeholder="example@example.com" aria-describedby="basic-addon1">
 </div>
 								</div>
 
-			<div class="checkbox">
+
+		<div class="col-lg-6">
+			<div class="input-group">
+  <span class="input-group-addon" id="basic-addon1">Password</span>
+  <input id="password" type="password" class="form-control" placeholder="" aria-describedby="basic-addon1">
+</div>
+</div>
+	<div class="input-group">
+<div class="checkbox">
     <label>
       <input type="checkbox"> E-Mail Notifications
     </label>
   </div>
+		  </div>
 
+		<div id="settings" class="form-actions">
+	<button id="delete-settings" type="submit" class="btn btn-danger pull-right">Delete settings</button>
+  <button id="save-settings" type="submit" class="btn btn-primary pull-right">Save</button>
+</div>
 		</div>
   </div>
 </html>
