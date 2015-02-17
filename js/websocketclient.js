@@ -5,7 +5,7 @@ var dcodeIO;
 var RBLMessage = dcodeIO.ProtoBuf.loadProtoFile("proto/raspberrylife.proto").build("RBLMessage");
 var WebSocket;
 var socket;
-var clientID = "webclient v0.8";
+var clientID = "webclient v0.9";
 var socketIP = "localhost";
 
 var exeType = document.getElementById("exeType");
