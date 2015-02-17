@@ -34,6 +34,7 @@ function createWebSocket(socketIP) {
 		console.log("Websocket: connecting..");
 		wsSendAuthRequestMessage();
 		console.log("Websocket: connected");
+		wsSendUserMessage();
 	};
 
 	socket.onclose = function () {
@@ -48,6 +49,34 @@ function wsSendAuthRequestMessage() {
 		var msgNumber = "50";
 		var plainTextValue = "abc12345";
 		var message = buildPlainTextMessage(clientID, msgType, msgFlag, msgNumber, plainTextValue);
+		socket.send(message.toArrayBuffer());
+	} else {
+			console.log("Websocket: not connected");
+	}
+}
+
+function wsSendUserMessage() {
+	if (socket.readyState == WebSocket.OPEN) {
+		var msgType = "USER";
+		var msgFlag = "REQUEST";
+		var msgNumber = "51";
+		var plainTextValue1 = $.cookie('email');
+		var plainTextValue2 = $.cookie('password');
+		var message = buildPlainTextMessage2(clientID, msgType, msgFlag, msgNumber, plainTextValue1, plainTextValue2);
+		socket.send(message.toArrayBuffer());
+	} else {
+			console.log("Websocket: not connected");
+	}
+}
+
+function wsSendDataSetMessage() {
+	if (socket.readyState == WebSocket.OPEN) {
+		var msgType = "DATASET";
+		var msgFlag = "REQUEST";
+		var msgNumber = "52";
+		var crudType = "RETRIEVE";
+		var dataType = "MODULE_LIST";
+		var message = buildDataSetMessage(clientID, msgType, msgFlag, msgNumber, crudType, dataType);
 		socket.send(message.toArrayBuffer());
 	} else {
 			console.log("Websocket: not connected");
