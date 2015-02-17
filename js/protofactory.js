@@ -129,7 +129,9 @@ function buildSetDataMessage(clientID, msgType, msgFlag, msgNumber, actType, act
 }
 
 function buildLogicMessage(clientID, msgType, msgFlag, msgNumber, crudType, logicId, logicName, exeType, exeReq, initType, initId, conFieldId, conState, recType, recId, insId, params, modType, modId) {
-	var logicInitiatorMessage = new RBLMessage({
+	var i = 0;
+
+	var logicInitiatorMessage = {
 			"id": "webclient_logic",
 			"messageType": "LOGIC",
 			"messageFlag": "REQUEST",
@@ -148,13 +150,34 @@ function buildLogicMessage(clientID, msgType, msgFlag, msgNumber, crudType, logi
 
 				"exeRequirement": "SINGLE",
 
-				"logicInitiator":
+				"logicReceiver":
 					{
+
+						"receiver":
+							{
+								"actuatorType": "MODULE",
+								"actuatorId": recId
+							},
+
+						"instruction":
+								{
+								"instructionId": "51",
+								"parameters": ""
+								}
+					}
+			}
+		};
+
+	while( i < initId.length) {
+					console.log("LOGGGG" + initId[i]);
+
+					var newLogicInit = "logicInitiator";
+					var newValue = {
 
 						"initiator":
 							{
 								"actuatorType": "MODULE",
-								"actuatorId": "234"
+								"actuatorId": initId[i]
 							},
 
 						"condition":
@@ -162,30 +185,17 @@ function buildLogicMessage(clientID, msgType, msgFlag, msgNumber, crudType, logi
 								"fieldId": conFieldId,
 								"state": conState
 								}
-					},
-
-				"logicReceiver":
-					{
-
-						"receiver":
-							{
-								"actuatorType": "MODULE",
-								"actuatorId": "4564"
-							},
-
-						"instruction":
-								{
-								"instructionId": "51",
-								"parameters": "",
-								"moduleType": modType,
-								"moduleId": "23"
-								}
 					}
-			}
-		});
+
+
+					logicInitiatorMessage.logic[newLogicInit] = newValue;
+					i++;
+				}
+
+	var completeLogicInitiatorMessage = new RBLMessage(logicInitiatorMessage);
 
 	console.log("RUNINSTRUCTIONMESSAGE: " + logicInitiatorMessage);
-	return logicInitiatorMessage;
+	return completeLogicInitiatorMessage;
 }
 
 function buildDataMessage(fieldID, dataType, stringData, int32Data, floatData) {
