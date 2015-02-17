@@ -17,15 +17,15 @@ message RBLMessage {
 	optional int32 messageNumber = 4;
 
 	// Range 21 - 30 : Basic messages
-	optional PlainText plainText = 21;
+	repeated PlainText plainText = 21;
 
 	// Range 31 - 50 : Functional messages
-	optional RunInstruction runInstruction = 31;
-	optional Logic logic = 32;
+	repeated RunInstruction runInstruction = 31;
+	repeated Logic logic = 32;
 
 	// Range 51 - 70 : Data operation messages
-	optional DataSet dataSet = 51;
-	optional User user = 52;
+	repeated DataSet dataSet = 51;
+	repeated User user = 52;
 
 
 	// =============================================================================
@@ -44,7 +44,7 @@ message RBLMessage {
 		RUN_INSTRUCTION = 2;
 		DATASET = 3;
 		LOGIC = 4;
-
+		USER = 5;
 	}
 
 	enum ModuleType{
@@ -106,6 +106,8 @@ message RBLMessage {
 		required ActuatorType actuatorType = 1;
 		required int32 actuatorId = 2;
 		optional string name  = 3;
+		optional ModuleType moduleType = 4;
+		optional int32 moduleId = 5;
 	}
 
 	// =============================================================================
@@ -116,10 +118,6 @@ message RBLMessage {
 		// Name of the instruction
 		required int32 instructionId = 1;
 		repeated string parameters = 2;
-
-		// Module
-		optional ModuleType moduleType = 20;
-		optional int32 moduleId = 21;
 	}
 
 	message RunInstruction {
@@ -135,6 +133,8 @@ message RBLMessage {
 		required CrudType crudType = 1;
 		required int32 id = 2;
 		optional string name = 3;
+		optional string email = 4;
+		optional string password = 5;
 	}
 
 	// =============================================================================
@@ -143,7 +143,7 @@ message RBLMessage {
 
 	message Logic {
 		required CrudType crudType = 1;
-		required int32 id = 2;
+		optional int32 id = 2;
 		required string name = 3;
 		required ExecutionFrequency exeFrequency = 4;
 		required ExecutionRequirement exeRequirement = 5 [default = SINGLE];
@@ -157,7 +157,7 @@ message RBLMessage {
 	}
 
 	message LogicReceiver {
-		repeated Actuator receiver = 1;
+		required Actuator receiver = 1;
 		required Instruction instruction = 2;
 	}
 
@@ -173,7 +173,7 @@ message RBLMessage {
 		required ExecutionType exeType = 1;
 		optional int32 minute = 2; // 0 - 59
 		optional int32 hour = 3; // 0 - 23
-		optional int32 day = 4; // 0 - 6 starting monday
+		optional int32 day = 4; // 0 - 6 starting Monday
 		optional int32 week = 5; // 0 - 3
 	}
 
@@ -197,16 +197,14 @@ message RBLMessage {
 		optional Actuator actuator = 3;
 		optional int32 fieldId = 4;
 		optional Range range = 5;
-		optional Data data = 6;
+		repeated Data data = 6;
 	}
-
-
 
 	message Data {
-		repeated Actuator actuators = 1;
-		repeated string stringData = 2;
-		repeated int32 int32Data = 3;
-		repeated float floatData = 4;
+		optional Actuator actuator = 1;
+		optional string stringData = 2;
+		optional int32 int32Data = 3;
+		optional float floatData = 4;
 	}
 
-	} // Close RBLMessage
+} // Close RBLMessage
