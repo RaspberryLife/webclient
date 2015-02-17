@@ -25,6 +25,22 @@ function buildPlainTextMessage(clientID, msgType, msgFlag, msgNumber, plainTextV
 	return plainTextMessage;
 }
 
+function buildPlainTextMessage2(clientID, msgType, msgFlag, msgNumber, plainTextValue1, plainTextValue2) {
+	var baseMessage = buildBaseMessage(clientID, msgType, msgFlag, msgNumber);
+
+	var text = {
+		"plainText":
+			{
+				"text": plainTextValue1,
+				"text": plainTextValue2
+			}
+	};
+
+	var plainTextMessage = $.extend(baseMessage, text);
+
+	return plainTextMessage;
+}
+
 function buildRunInstructionMessage(clientID, msgType, msgFlag, msgNumber, actType, actID, insId, params, modType, modId) {
 	var baseMessage = buildBaseMessage(clientID, msgType, msgFlag, msgNumber);
 	var actuatorMessage = buildActuatorMessage(actType, actID);
@@ -182,3 +198,21 @@ function buildDataMessage(fieldID, dataType, stringData, int32Data, floatData) {
 			};
 	return dataMessage;
 }
+
+function buildDataSetMessage(clientID, msgType, msgFlag, msgNumber,crudType, dataType) {
+	dataSetMessage = new RBLMessage({
+			"id": clientID,
+			"messageType": msgType,
+			"messageFlag": msgFlag,
+			"messageNumber": msgNumber,
+
+				"dataSet":
+					{
+						"crudType": crudType,
+						"dataType": dataType
+					}
+	});
+
+	return dataSetMessage;
+}
+
