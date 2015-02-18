@@ -4,6 +4,7 @@ var savebtn = document.getElementById('save-logic');
 var in_modules = [];
 var out_modules = [];
 var initId = [];
+var recId = [];
 
 savebtn.addEventListener('click', function() {
     createInitiatorModulesArray();
@@ -42,7 +43,6 @@ function parseInitiatorModules (in_modules) {
 			modType = in_modules[i].getAttribute("data-mtype");
 			conFieldId = in_modules[i].childNodes[1].firstChild.getAttribute("data-field-id");
 			conState = in_modules[i].childNodes[1].firstChild.checked.toString();
-			//console.log("i="+i+" initid="+initId);
 			i++;
 		});
 }
@@ -51,9 +51,8 @@ function parseReceiverModules (out_modules) {
 	i=0;
 		$.each(out_modules, function( index, value ) {
 			out_modules[i] = value[0];
-			recId = out_modules[i].getAttribute("id");
+			recId[i] = out_modules[i].getAttribute("id");
 			modType = out_modules[i].getAttribute("data-mtype");
-			console.log("DEBUG: " + initId + " " + modType + " " + conFieldId + " " + conState);
 			i++;
 		});
 }

@@ -161,27 +161,11 @@ function buildLogicMessage(clientID, msgType, msgFlag, msgNumber, crudType, logi
 					initiatorArray,
 
 				"logicReceiver":
-					{
-
-						"receiver":
-							{
-								"actuatorType": "MODULE",
-								"actuatorId": recId
-							},
-
-						"instruction":
-								{
-								"instructionId": "51",
-								"parameters": ""
-								}
-					}
+					receiverArray
 			}
 		};
 
 	while( i < initId.length) {
-					console.log("LOGGGG" + initId[i]);
-
-					//var newLogicInit = "logicInitiator";
 					var newValue = {
 						"initiator":
 							{
@@ -195,8 +179,13 @@ function buildLogicMessage(clientID, msgType, msgFlag, msgNumber, crudType, logi
 								"state": conState
 								}
 					};
+					initiatorArray.push(newValue);
+					i++;
+				}
 
-					var newValue2 = {
+
+			while( j < recId.length) {
+								var newValue2 = {
 								"receiver":
 							{
 								"actuatorType": "MODULE",
@@ -209,13 +198,9 @@ function buildLogicMessage(clientID, msgType, msgFlag, msgNumber, crudType, logi
 								"parameters": ""
 								}
 					}
-
-
-					initiatorArray.push(newValue);
 					receiverArray.push(newValue2);
-
-					i++;
-				}
+					j++
+			}
 
 	var completeLogicInitiatorMessage = new RBLMessage(logicInitiatorMessage);
 
