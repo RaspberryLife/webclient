@@ -21,38 +21,39 @@ function createInitiatorModulesArray () {
 	$("#IF-dropzone").children(".drag-drop").each(function(){
 		var id = $(this);
 		in_modules.push(id);
+		console.log("Initiator Modules :" + in_modules.length);
 		i++;
 	});
 }
 
 function createReceiverModulesArray () {
-	var i = 0;
+	var j = 0;
 	$("#THEN-dropzone").children(".drag-drop").each(function(){
 		var id = $(this);
 		out_modules.push(id);
-		console.log("Receiver Modules :" + out_modules[i].attr('id'));
-		i++;
+		console.log("Receiver Modules :" + out_modules.length);
+		j++;
 	});
 }
 
 function parseInitiatorModules (in_modules) {
-	i=0;
+	k=0;
 		$.each(in_modules, function( index, value ) {
-			in_modules[i] = value[0];
-			initId[i] = in_modules[i].getAttribute("id");
-			modType = in_modules[i].getAttribute("data-mtype");
-			conFieldId = in_modules[i].childNodes[1].firstChild.getAttribute("data-field-id");
-			conState = in_modules[i].childNodes[1].firstChild.checked.toString();
-			i++;
+			in_modules[k] = value[0];
+			initId[k] = in_modules[k].getAttribute("id");
+			modType = in_modules[k].getAttribute("data-mtype");
+			conFieldId = in_modules[k].childNodes[1].firstChild.getAttribute("data-field-id");
+			conState = in_modules[k].childNodes[1].firstChild.checked.toString();
+			k++;
 		});
 }
 
 function parseReceiverModules (out_modules) {
-	i=0;
+	l=0;
 		$.each(out_modules, function( index, value ) {
-			out_modules[i] = value[0];
-			recId[i] = out_modules[i].getAttribute("id");
-			modType = out_modules[i].getAttribute("data-mtype");
-			i++;
+			out_modules[l] = value[0];
+			recId[l] = out_modules[l].getAttribute("id");
+			modType = out_modules[l].getAttribute("data-mtype");
+			l++;
 		});
 }

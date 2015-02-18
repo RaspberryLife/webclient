@@ -189,7 +189,7 @@ function buildLogicMessage(clientID, msgType, msgFlag, msgNumber, crudType, logi
 								"receiver":
 							{
 								"actuatorType": "MODULE",
-								"actuatorId": recId[i]
+								"actuatorId": recId[j]
 							},
 
 						"instruction":
