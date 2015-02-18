@@ -26,17 +26,20 @@ function buildPlainTextMessage(clientID, msgType, msgFlag, msgNumber, plainTextV
 }
 
 function buildPlainTextMessage2(clientID, msgType, msgFlag, msgNumber, plainTextValue1, plainTextValue2) {
-	var baseMessage = buildBaseMessage(clientID, msgType, msgFlag, msgNumber);
 
-	var text = {
-		"plainText":
-			{
-				"text": plainTextValue1,
-				"text": plainTextValue2
-			}
-	};
+		var plainTextMessage = new RBLMessage({
+		"id": clientID,
+			"messageType": msgType,
+			"messageFlag": msgFlag,
+			"messageNumber": msgNumber,
 
-	var plainTextMessage = $.extend(baseMessage, text);
+			"plainText":
+		[
+			{"text": plainTextValue1},
+			{"text": plainTextValue2}
+		]
+
+		});
 
 	return plainTextMessage;
 }
