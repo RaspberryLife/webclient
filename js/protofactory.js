@@ -133,6 +133,10 @@ function buildSetDataMessage(clientID, msgType, msgFlag, msgNumber, actType, act
 
 function buildLogicMessage(clientID, msgType, msgFlag, msgNumber, crudType, logicId, logicName, exeType, exeReq, initType, initId, conFieldId, conState, recType, recId, insId, params, modType, modId) {
 	var i = 0;
+	var j = 0;
+	var initiatorArray = [];
+	var receiverArray = [];
+
 
 	var logicInitiatorMessage = {
 			"id": "webclient_logic",
@@ -152,6 +156,9 @@ function buildLogicMessage(clientID, msgType, msgFlag, msgNumber, crudType, logi
 					},
 
 				"exeRequirement": "SINGLE",
+
+					"logicInitiator":
+					initiatorArray,
 
 				"logicReceiver":
 					{
@@ -174,9 +181,8 @@ function buildLogicMessage(clientID, msgType, msgFlag, msgNumber, crudType, logi
 	while( i < initId.length) {
 					console.log("LOGGGG" + initId[i]);
 
-					var newLogicInit = "logicInitiator";
+					//var newLogicInit = "logicInitiator";
 					var newValue = {
-
 						"initiator":
 							{
 								"actuatorType": "MODULE",
@@ -188,10 +194,26 @@ function buildLogicMessage(clientID, msgType, msgFlag, msgNumber, crudType, logi
 								"fieldId": conFieldId,
 								"state": conState
 								}
+					};
+
+					var newValue2 = {
+								"receiver":
+							{
+								"actuatorType": "MODULE",
+								"actuatorId": recId[i]
+							},
+
+						"instruction":
+								{
+								"instructionId": "51",
+								"parameters": ""
+								}
 					}
 
 
-					logicInitiatorMessage.logic[newLogicInit] = newValue;
+					initiatorArray.push(newValue);
+					receiverArray.push(newValue2);
+
 					i++;
 				}
 
