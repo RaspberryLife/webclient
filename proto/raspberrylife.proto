@@ -205,6 +205,7 @@ message RBLMessage {
 		optional string stringData = 2;
 		optional int32 int32Data = 3;
 		optional float floatData = 4;
+		optional bytes byteData = 5;
 	}
 
 } // Close RBLMessage
