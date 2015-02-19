@@ -5,6 +5,10 @@ var in_modules = [];
 var out_modules = [];
 var initId = [];
 var recId = [];
+var execType = document.getElementById("exec-type");
+var execReq = document.getElementById("exec-req");
+var execT;
+var execR;
 
 savebtn.addEventListener('click', function() {
     createInitiatorModulesArray();
@@ -12,7 +16,7 @@ savebtn.addEventListener('click', function() {
 		parseInitiatorModules(in_modules);
 		parseReceiverModules(out_modules);
 		logicName = document.getElementById('logic-name').value;
-		wsSendLogicMessage(logicName, initId, modType, conFieldId, conState, recId, modType);
+		wsSendLogicMessage(logicName, initId, modType, conFieldId, conState, recId, modType, execT, execR);
 }, false);
 
 
@@ -40,6 +44,8 @@ function parseInitiatorModules (in_modules) {
 	k=0;
 		$.each(in_modules, function( index, value ) {
 			in_modules[k] = value[0];
+			execT = execType.options[execType.selectedIndex].value;
+			execR = execReq.options[execReq.selectedIndex].value;
 			initId[k] = in_modules[k].getAttribute("id");
 			modType = in_modules[k].getAttribute("data-mtype");
 			conFieldId = in_modules[k].childNodes[1].firstChild.getAttribute("data-field-id");
