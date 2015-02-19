@@ -16,6 +16,28 @@
       </span>
 </div>
   </div>
+				<br>
+				<div class="col-lg-1">
+				Options
+				</div>
+				<div class="col-lg-3">Execution Type:
+				<select id="exec-type">
+  <option value="IMMEDIATELY">immediately</option>
+  <option value="MINUTELY">minutely</option>
+  <option value="HOURLY">hourly</option>
+  <option value="DAILY">daily</option>
+	<option value="WEEKLY">weekly</option>
+  <option value="MONTHLY">monthly</option>
+</select>
+				</div>
+				<div class="col-lg-3">Execution Requirement:
+				<select id="exec-req">
+  <option value="SINGLE">single</option>
+  <option value="MAJORITY">majority</option>
+  <option value="ALL">all</option>
+</select>
+				</div>
+				<br>
   <div class="panel-body">
 
 			<div class="dropzone col-lg-6" id="IF-dropzone">
@@ -73,6 +95,21 @@
     </div>
     <div id="pane2" class="tab-pane">
     <h4>Modules</h4>
+			<div class="col-lg-12">
+			<div class="draggable drag-drop" id="7" data-mtype="MODULE_PIR">
+				Window Sensor
+				<input id="module1-toggle" type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-field-id="1">
+			</div>
+			<div class="draggable drag-drop" id="8" data-mtype="MODULE_PIR">
+			Movement Detector Alarm
+			<input id="module2-toggle" type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-field-id="2">
+			</div>
+			<div class="draggable drag-drop" id="9" data-mtype="MODULE_OUTLET">
+			Outlet 1
+			<input id="module3-toggle" type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-field-id="3">
+			</div>
+
+				</div>
     </div>
     <div id="pane3" class="tab-pane">
       <h4>Modules</h4>
