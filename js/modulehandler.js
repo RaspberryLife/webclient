@@ -12,7 +12,7 @@ $(function() {
 
 function switchOn() {
 	
-	var clientID = "webclient v0.6";
+	var clientID = "webclient v1.0";
 	var msgType = "RUN_INSTRUCTION";
 	var msgFlag = "REQUEST";
 	var msgNumber = "53";
