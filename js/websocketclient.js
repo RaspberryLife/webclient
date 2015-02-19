@@ -5,7 +5,7 @@ var dcodeIO;
 var RBLMessage = dcodeIO.ProtoBuf.loadProtoFile("proto/raspberrylife.proto").build("RBLMessage");
 var WebSocket;
 var socket;
-var clientID = "webclient v0.9";
+var clientID = "webclient v1.0";
 var socketIP = "localhost";
 
 var exeType = document.getElementById("exeType");
@@ -40,6 +40,35 @@ function createWebSocket(socketIP) {
 	socket.onclose = function () {
 	};
 }
+
+socket.onmessage = function (message) {
+		try {
+			// Decode the Message
+			message = RBLMessage.decode(message.data);
+			messageID = message.id;
+			messageType = message.messageType;
+			messageFlag = message.messageFlag;
+			plainText = message.plainText.text;
+			/*fieldID = message.data.fieldId;
+			dataType = message.data.dataType;
+			stringData = message.data.stringData;
+			int32Data = message.data.int32Data;
+			floatData = message.data.floatData;
+			startDateTime = message.data.startDateTime;
+			endDateTime = message.data.endDateTime;*/
+
+			console.log("Message ID: " + messageID);
+			console.log("Message Type: " + messageType);
+			console.log("Message Flag: " + messageFlag);
+			console.log("PlainText: " + plainText);
+
+
+		} catch (err) {
+			console.log("Error: " + err);
+		}
+	};
+
+
 
 // Send authentication request
 function wsSendAuthRequestMessage() {
@@ -83,14 +112,14 @@ function wsSendDataSetMessage() {
 	}
 }
 
-function wsSendLogicMessage(logicName, initId, modType, conFieldId, conState, recId, modType) {
+function wsSendLogicMessage(logicName, initId, modType, conFieldId, conState, recId, modType, execT, execR) {
 	if (socket.readyState === WebSocket.OPEN) {
 		var msgType = "LOGIC";
 		var msgFlag = "REQUEST";
 		var msgNumber = "623";
 		var crudType = "CREATE";
 		var logicId = "124";
-		var message = buildLogicMessage(clientID, msgType, msgFlag, msgNumber, crudType, logicId, logicName, exeType, exeReq, initType, initId, conFieldId, conState, recType, recId, insId, params, modType, modId);
+		var message = buildLogicMessage(clientID, msgType, msgFlag, msgNumber, crudType, logicId, logicName, execT, execR, initType, initId, conFieldId, conState, recType, recId, insId, params, modType, modId);
 		console.log("Websocket: Sending Message: " + JSON.stringify(message));
 		socket.send(message.toArrayBuffer());
 		console.log(initType);
