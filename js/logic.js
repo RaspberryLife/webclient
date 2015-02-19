@@ -74,7 +74,6 @@ interact('.dropzone').dropzone({
         event.relatedTarget.classList.remove('can-drop');
 
 				var draggableElement = event.relatedTarget;
-				//$('#'+draggableElement.id).appendTo('#' + 'pane1');
     },
     ondrop: function (event) {
         var draggableElement = event.relatedTarget,
