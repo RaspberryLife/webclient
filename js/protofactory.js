@@ -131,7 +131,7 @@ function buildSetDataMessage(clientID, msgType, msgFlag, msgNumber, actType, act
 	return setDataMessage;
 }
 
-function buildLogicMessage(clientID, msgType, msgFlag, msgNumber, crudType, logicId, logicName, exeType, exeReq, initType, initId, conFieldId, conState, recType, recId, insId, params, modType, modId) {
+function buildLogicMessage(clientID, msgType, msgFlag, msgNumber, crudType, logicId, logicName, execT, execR, initType, initId, conFieldId, conState, recType, recId, insId, params, modType, modId) {
 	var i = 0;
 	var j = 0;
 	var initiatorArray = [];
@@ -152,10 +152,10 @@ function buildLogicMessage(clientID, msgType, msgFlag, msgNumber, crudType, logi
 
 				"exeFrequency":
 				{
-						"exeType": "IMMEDIATELY"
+						"exeType": execT
 					},
 
-				"exeRequirement": "SINGLE",
+				"exeRequirement": execR,
 
 					"logicInitiator":
 					initiatorArray,
