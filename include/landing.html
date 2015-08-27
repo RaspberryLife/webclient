@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <div class="row">
-  <div class="col-lg-12">
-    <h1 class="page-header">Welcome to the RaspberryLife Webclient</h1>
-		<div class="col-lg-12">
-		Please select a menu item on the left.
+	<div class="col-lg-12">
+		<h1 class="page-header">Welcome to the RaspberryLife Webclient</h1>
+
+		<div class="col-lg-12 server_status">
+
+			<ul class="server_status_list">
+				<li>
+					Status: <span id="server_connected" class="server_status_text">Not connected</span>
+				</li>
+				<li>
+					IP: <span id="server_ip" class="server_status_text">localhost</span>
+				</li>
+			</ul>
+
 		</div>
-  </div>
+	</div>
 </div>
+
+<script src="js/overview.js" type="text/javascript"></script>
 
 </html>

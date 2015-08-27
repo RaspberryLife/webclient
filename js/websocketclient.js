@@ -41,6 +41,11 @@ function createWebSocket(socketIP) {
 	};
 }
 
+function socketIsOpen() {
+	console.log("Checking server connection");
+	return socket.readyState == WebSocket.OPEN;
+};
+
 socket.onmessage = function (message) {
 		try {
 			// Decode the Message
