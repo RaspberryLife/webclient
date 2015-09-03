@@ -1,13 +1,23 @@
 var connection_status_text = $('#connection_status');
+var connectionUrl = "http://localhost:8080";
 
-var checkConnection = function checkConnection() {
-	console.log("Checking connection");
+var getConnectionUrl = function getConnectionUrl(path){
+	return connectionUrl + path;
+};
+
+var showModules = function showModules(moduleList) {
 	$.ajax({
-		url: "http://localhost:8080/rbl/extension/fablab/status",
+		url: getConnectionUrl("/rbl/extension/fablab/modules")
+	}).success(function (response) {
+		connection_status_text.html("OK");
+		var moduleContainer = $('#module_container');
+		var source = $('#fablab_modules').html();
+		var template = Handlebars.compile(source);
+		var context  = {modules: response.moduleList};
+		moduleContainer.html(template(context));
+		response.moduleList.forEach(function () {
 
-	}).success(function(response) {
-		//Logs Fablab module states
-		connection_status_text.html(response.status);
+		});
 	});
 };
 
@@ -20,10 +30,6 @@ $(':input').change(function () {
 
 });
 
-setInterval(function () {
-		checkConnection();
-	}
-	, 3000);
+showModules();
 
-//getListOfModules();
 //load switches
