@@ -78,18 +78,9 @@
 						<a id="home" class="active" href="#/home"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 					</li>
 					<li>
-						<a href="#"><i class="fa fa-home fa-fw"></i> Rooms<span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li>
-								<a id="fablab" href="#/fablab">FabLab</a>
-							</li>
-						</ul>
+						<a id="fablab" href="#/fablab"><i class="fa fa-home fa-fw"></i> Rooms<span class="fa arrow"></span></a>
 					<li>
 						<a id="logic" href="#/logic"><i class="fa fa-sliders fa-fw"></i> Logic Test</a>
-					</li>
-					<li>
-						<a id="debug" href="#/debug"><i class="fa fa-terminal fa-fw"></i> Debug</a>
-					</li>
 					</li>
 				</ul>
 			</div>
@@ -130,15 +121,6 @@
 <!-- Settings JavaScript -->
 <script src="js/settings.js" type="text/javascript"></script>
 
-<!-- ProtoBuf Related JavaScript -->
-<script src="js/plugins/protobuf/ByteBufferAB.min.js" type="text/javascript"></script>
-<script src="js/plugins/protobuf/Long.min.js" type="text/javascript"></script>
-<script src="js/plugins/protobuf/ProtoBuf.min.js" type="text/javascript"></script>
-<script src="js/protofactory.js" type="text/javascript"></script>
-
-<!-- Websocket Client JavaScript -->
-<script src="js/websocketclient.js" type="text/javascript"></script>
-
 <script type="text/javascript" charset="utf-8">
 	;
 	(function ($) {
@@ -146,17 +128,10 @@
 
 
 			this.get('#/home', function () {
-				this.swap('include/landing.html');
+				this.swap('include/fablab.html');
 				$('#side-menu li a').removeClass('active');
 
 				jQuery('#home').addClass('active');
-			});
-
-			this.get('#/fablab', function () {
-				$('#side-menu li a').removeClass('active');
-				$('#fablab').addClass('active');
-
-				this.swap('include/fablab.html');
 			});
 
 			this.get('#/logic', function () {
@@ -164,12 +139,6 @@
 				$('#logic').addClass('active');
 
 				this.swap('include/logic.html');
-			});
-
-			this.get('#/debug', function () {
-				this.swap('include/debug.html');
-				$('#side-menu li a').removeClass('active');
-				$('#debug').addClass('active');
 			});
 
 			this.get('#/settings', function () {
