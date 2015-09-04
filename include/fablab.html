@@ -7,7 +7,7 @@
 	<div class="col-lg-12">
 
 		<h2 class="page-header">Server Status</h2>
-		<h4>Connection: <span id="connection_status">checking...</span></h4>
+		<h4>Database: <span id="database_status">checking...</span></h4>
 
 	</div>
 
@@ -17,7 +17,9 @@
 		<div id="module_container">
 
 			<script id="fablab_modules" type="text/x-handlebars-template">​
+
 				{{#each modules}}
+
 				<div class="draggable drag-drop">
 					<span>Fenster {{id}}</span>
 					<div class="toggle btn btn-success" data-toggle="toggle">
@@ -35,10 +37,10 @@
 						</div>
 					</div>
 				</div>
-				​
-				{{/each}}
-			</script>
 
+				{{/each}}
+
+			</script>
 
 		</div>
 	</div>
@@ -47,10 +49,10 @@
 		<h2 class="page-header">Notification</h2>
 
 		<label for="not_email">Email</label>
-		<input type="text" placeholder="example@example.com" id="not_email"/>
+		<input type="text" value="" placeholder="example@example.com" id="not_email"/>
 
 		<label for="not_time">Notification Time</label>
-		<input type="text" placeholder="19:47" id="not_time"/>
+		<input type="text" value="" placeholder="19:47" id="not_time"/>
 
 	</div>
 
