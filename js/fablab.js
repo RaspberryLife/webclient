@@ -39,13 +39,18 @@ var getAdminUsers = function getAdminUsers() {
 };
 
 var addNewAdminUser = function addNewAdminUser(){
+
+	var userr = {
+		name: "Admin1",
+		email: $('#not_email').val(),
+		role: 'admin'
+	};
+
 	$.ajax({
-		url: getConnectionUrl("/rbl/system/database/user"),
+		url: getConnectionUrl("/rbl/system/database/user2"),
 		method: 'POST',
 		data: {
-			name: "Admin1",
-			email: $('#not_email').val(),
-			role: 'admin'
+			user: JSON.stringify(userr)
 		}
 	}).success(function (response) {
 		console.log(response);
@@ -68,15 +73,18 @@ var sendSerialMessage = function sendSerialMessage(){
 $(':input').change(function () {
 	console.log($(this).data('module-name') + " is " + ($(this).prop('checked') ? 'on' : 'off'));
 
-	if ($(this).prop('checked') == true) {
+	if ($(this).prop('checked') === true) {
 		//switch light on
 	}
 
 });
 
+$('#testbtn').click(function(){
+	addNewAdminUser();
+});
+
 showModules();
 checkDatabaseAvailable();
 getAdminUsers();
-addNewAdminUser();
 
 setTimeout(checkDatabaseAvailable(), 10000);
