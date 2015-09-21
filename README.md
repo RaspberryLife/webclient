@@ -5,9 +5,8 @@ RaspberryLife Webclient is a web-based client used to interact with the [Raspber
 ## Installation
 
 1. Download and extract the [latest release](https://github.com/RaspberryLife/webclient/releases/latest) of RaspberryLife Webclient
-2. Setup a local web server
-	A quick way to do this is by using a python HTTP server: 
-		# python -m http.server 80
+2. Setup a local web server. A quick way to do this is by using a python HTTP server:
+		`# python -m http.server 80`
 3. Open the web client by typing `localhost` into your browser's address bar
 
 ## Contributing
