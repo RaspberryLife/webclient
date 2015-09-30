@@ -47,10 +47,13 @@ var addNewAdminUser = function addNewAdminUser(){
 	};
 
 	$.ajax({
-		url: getConnectionUrl("/rbl/system/database/user2"),
+		url: getConnectionUrl("/rbl/system/database/user"),
 		method: 'POST',
 		data: {
-			user: JSON.stringify(userr)
+			name: 'bla',
+			email: 'bla',
+			role : 'bla',
+			password : 'blabla'
 		}
 	}).success(function (response) {
 		console.log(response);
@@ -69,6 +72,72 @@ var sendSerialMessage = function sendSerialMessage(){
 		}
 	});
 };
+var insertlogic = function insertlogic(){
+	console.log(thelogic);
+	$.ajax({
+		url: getConnectionUrl("/rbl/system/database/logic"),
+		method: 'POST',
+		data: {
+			logic : JSON.stringify(thelogic)
+		}
+	}).success(function (response) {
+		console.log(response);
+	});
+};
+
+var thelogic = {
+	name : 'fensterlogik',
+
+	// frequency of checking for status
+	executionFrequency : {
+		type : 'daily', // immediately, minutely, hourly, daily, weekly, monthly
+		minute : 0,
+		hour : 0,
+		day : 0,
+		week : 0
+	},
+
+	// single / majority / all
+	executionRequirement : 'single',
+
+	//Array of triggers
+	triggers : [
+		{
+			module : {
+				type : 'PIR',
+				name: 'wnindow1'
+			},
+			condition : {
+				fieldId : 0, // id of the field that is watched
+				thresholdOver : 0,
+				thresholdUnder : 0,
+				state : true
+			}
+		},
+		{
+			module : {
+				type : 'PIR',
+				name: 'wnindow2'
+			},
+			condition : {
+				fieldId : 0,
+				thresholdOver : 0,
+				thresholdUnder : 0,
+				state : true
+			}
+		}
+	],
+
+	//array of actions to execute
+	actions : [
+		{
+			type: 'notify', // currently only notify
+			user_id: 0, //user to notify
+			message: 'fenster offen du depp'
+		}
+	]
+
+};
 
 $(':input').change(function () {
 	console.log($(this).data('module-name') + " is " + ($(this).prop('checked') ? 'on' : 'off'));
@@ -80,11 +149,12 @@ $(':input').change(function () {
 });
 
 $('#testbtn').click(function(){
-	addNewAdminUser();
+	insertlogic();
 });
 
 showModules();
 checkDatabaseAvailable();
-getAdminUsers();
+addNewAdminUser();
+//getAdminUsers();
 
 setTimeout(checkDatabaseAvailable(), 10000);
