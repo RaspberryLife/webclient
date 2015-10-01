@@ -141,8 +141,8 @@ $('#save-logic').click(function(){
 	var name = $('#logic-name').val();
 	var exectype = $('#exec-type').val();
 	var execreq = $('#exec-req').val();
-	var ifs = $('#IF-dropzone').find('div');
-	var thens = $('#THEN-dropzone').find('div');
+	var ifs = $('#IF-dropzone').find('.drag-drop');
+	var thens = $('#THEN-dropzone').find('.drag-drop');
 	var triggers = [];
 	var actions = [];
 	$.each(ifs, function(key, value){
@@ -164,12 +164,12 @@ $('#save-logic').click(function(){
 		});
 	});
 
-	var logic = getLogic(name, exectype, execreq, triggers, actions);
-
+	var logic = getLogicMessage(name, exectype, execreq, triggers, actions);
+	console.log(logic);
 	insertlogic(logic);
 });
 
-var getLogic = function getLogic(name, exectype, execreq, triggers, actions) {
+var getLogicMessage = function getLogicMessage(name, exectype, execreq, triggers, actions) {
 	return {
 		name : name,
 
@@ -192,3 +192,26 @@ var getLogic = function getLogic(name, exectype, execreq, triggers, actions) {
 		actions : actions
 	};
 };
+
+var insertlogic = function insertlogic(logic){
+	console.log(logic);
+	$.ajax({
+		url: getConnectionUrl("/rbl/system/database/logic"),
+		method: 'POST',
+		data: {
+			logic : JSON.stringify(logic)
+		}
+	}).success(function (response) {
+		console.log(response);
+	});
+};
+
+var getLogics = function() {
+	$.ajax({
+		url: getConnectionUrl("/rbl/system/database/logics")
+	}).success(function (response) {
+		$('#logics').append(JSON.stringify(response));
+	});
+};
+
+getLogics();

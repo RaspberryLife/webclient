@@ -34,18 +34,7 @@ var sendSerialMessage = function sendSerialMessage(){
 		}
 	});
 };
-var insertlogic = function insertlogic(logic){
-	console.log(logic);
-	$.ajax({
-		url: getConnectionUrl("/rbl/system/database/logic"),
-		method: 'POST',
-		data: {
-			logic : JSON.stringify(logic)
-		}
-	}).success(function (response) {
-		console.log(response);
-	});
-};
+
 
 //update discovered modules with names and rooms
 var updateModules = function insertModules() {
@@ -74,7 +63,6 @@ var getModules = function getModules (container, source_template) {
 	$.ajax({
 		url: getConnectionUrl("/rbl/system/database/modules")
 	}).success(function (response) {
-		console.log(response);
 		var moduleContainer = $(container);
 		var source = $(source_template).html();
 		var template = Handlebars.compile(source);
