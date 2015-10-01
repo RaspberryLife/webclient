@@ -4,6 +4,7 @@
 
 <div class="row">
 
+	<!-- Server status -->
 	<div class="col-lg-12">
 
 		<h2 class="page-header">Server Status</h2>
@@ -11,6 +12,7 @@
 
 	</div>
 
+	<!-- Modules -->
 	<div class="col-lg-12">
 		<h2 class="page-header">Modules</h2>
 
@@ -22,6 +24,7 @@
 
 				<div class="draggable drag-drop">
 					<span>Fenster {{id}}</span>
+
 					<div class="toggle btn btn-success" data-toggle="toggle">
 						<input id="module{{id}}-toggle"
 							   type="checkbox" checked=""
@@ -45,6 +48,7 @@
 		</div>
 	</div>
 
+	<!-- Notification -->
 	<div class="col-lg-12">
 		<h2 class="page-header">Notification</h2>
 
@@ -56,12 +60,109 @@
 
 	</div>
 
+	<!-- Test -->
 	<div class="col-lg-12">
 		<h2 class="page-header">Test</h2>
-		<button class="btn btn-default" id="testbtn">Test</button>
+		<button class="btn btn-default" id="addlogic">Add Logic</button>
 		<button class="btn btn-default" id="loadmodules">Load modules</button>
 		<button class="btn btn-default" id="addadmin">Add admin</button>
 
+	</div>
+
+	<!-- Logic -->
+	<div class="col-lg-12">
+		<h1 class="page-header">Logic</h1>
+
+
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<div class="input-group">
+					<span class="input-group-addon">Name</span>
+					<input id="logic-name" type="text" class="form-control" placeholder="New Logic">
+
+					<span class="input-group-btn">
+        <button class="btn btn-default" type="button" id="save-logic">Save</button>
+      </span>
+				</div>
+			</div>
+			<br>
+
+			<div class="col-lg-1">
+				Options
+			</div>
+			<div class="col-lg-3">Execution Type:
+				<select id="exec-type">
+					<option value="IMMEDIATELY">immediately</option>
+					<option value="MINUTELY">minutely</option>
+					<option value="HOURLY">hourly</option>
+					<option value="DAILY">daily</option>
+					<option value="WEEKLY">weekly</option>
+					<option value="MONTHLY">monthly</option>
+				</select>
+			</div>
+			<div class="col-lg-3">Execution Requirement:
+				<select id="exec-req">
+					<option value="SINGLE">single</option>
+					<option value="MAJORITY">majority</option>
+					<option value="ALL">all</option>
+				</select>
+			</div>
+			<br>
+
+			<div class="panel-body">
+
+				<div class="dropzone col-lg-6" id="IF-dropzone">
+					If
+				</div>
+
+				<div class="dropzone col-lg-6" id="THEN-dropzone">
+					Then
+				</div>
+
+			</div>
+		</div>
+
+		<ul class="nav nav-tabs">
+			<li role="presentation"><a href="#pane1" data-toggle="tab">FabLab modules</a></li>
+		</ul>
+
+		<div class="tab-content">
+			<div id="pane1" class="tab-pane active">
+
+				<div class="col-lg-12">
+					<div class="draggable drag-drop" id="1" data-mtype="MODULE_OUTLET">
+						Outlet 1
+						<input id="module1-toggle" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
+							   data-offstyle="danger" data-field-id="1">
+					</div>
+					<div class="draggable drag-drop" id="2" data-mtype="MODULE_OUTLET">
+						Outlet 2
+						<input id="module2-toggle" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
+							   data-offstyle="danger" data-field-id="2">
+					</div>
+					<div class="draggable drag-drop" id="3" data-mtype="MODULE_OUTLET">
+						Outlet 3
+						<input id="module3-toggle" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
+							   data-offstyle="danger" data-field-id="3">
+					</div>
+					<div class="draggable drag-drop" id="4">
+						Temperature
+						<div id="slider-range"></div>
+						<div id="slider-range-value">Value:</div>
+					</div>
+					<div class="draggable drag-drop" id="5">
+						Temperature range
+						<div id="slider-handles"></div>
+						<div id="slider-handles-lower">Value:</div>
+						<div id="slider-handles-upper">Value:</div>
+					</div>
+					<div class="draggable drag-drop" size="4" id="6">
+						Send mail to:
+						<div><input type="email" name="email"></div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 </div>
@@ -72,8 +173,8 @@
 <!-- Bootstrap Toggles JavaScript -->
 <script src="js/plugins/toggles/bootstrap-toggle.min.js"></script>
 
-
 <!-- FabLab setup JavaScript -->
+<script src="js/logic.js"></script>
 <script src="js/fablab.js"></script>
 
 </html>

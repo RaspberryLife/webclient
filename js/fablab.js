@@ -166,7 +166,7 @@ $(':input').change(function () {
 
 });
 
-$('#testbtn').click(function(){
+$('#addlogic').click(function(){
 	insertlogic();
 });
 
