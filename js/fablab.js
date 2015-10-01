@@ -39,21 +39,14 @@ var getAdminUsers = function getAdminUsers() {
 };
 
 var addNewAdminUser = function addNewAdminUser(){
-
-	var userr = {
-		name: "Admin1",
-		email: $('#not_email').val(),
-		role: 'admin'
-	};
-
 	$.ajax({
 		url: getConnectionUrl("/rbl/system/database/user"),
 		method: 'POST',
 		data: {
-			name: 'bla',
-			email: 'bla',
-			role : 'bla',
-			password : 'blabla'
+			name: 'DerAdmin',
+			email: 'admin@jaeristderadmin.de',
+			role : 'admin',
+			password : 'verschlüsseltespasswort1234'
 		}
 	}).success(function (response) {
 		console.log(response);
@@ -73,26 +66,26 @@ var sendSerialMessage = function sendSerialMessage(){
 	});
 };
 var insertlogic = function insertlogic(){
-	console.log(thelogic);
+	console.log(fensterlogik);
 	$.ajax({
 		url: getConnectionUrl("/rbl/system/database/logic"),
 		method: 'POST',
 		data: {
-			logic : JSON.stringify(thelogic)
+			logic : JSON.stringify(fensterlogik)
 		}
 	}).success(function (response) {
 		console.log(response);
 	});
 };
 
-var thelogic = {
+var fensterlogik = {
 	name : 'fensterlogik',
 
 	// frequency of checking for status
 	executionFrequency : {
 		type : 'daily', // immediately, minutely, hourly, daily, weekly, monthly
-		minute : 0,
-		hour : 0,
+		minute : 50,
+		hour : 17,
 		day : 0,
 		week : 0
 	},
@@ -104,25 +97,19 @@ var thelogic = {
 	triggers : [
 		{
 			module : {
-				type : 'PIR',
-				name: 'wnindow1'
+				id : '0'
 			},
 			condition : {
-				fieldId : 0, // id of the field that is watched
-				thresholdOver : 0,
-				thresholdUnder : 0,
-				state : true
+				fieldId : 1, // id of the field that is watched
+				state : true // window open
 			}
 		},
 		{
 			module : {
-				type : 'PIR',
-				name: 'wnindow2'
+				id : '1'
 			},
 			condition : {
-				fieldId : 0,
-				thresholdOver : 0,
-				thresholdUnder : 0,
+				fieldId : 1,
 				state : true
 			}
 		}
@@ -131,12 +118,43 @@ var thelogic = {
 	//array of actions to execute
 	actions : [
 		{
-			type: 'notify', // currently only notify
+			type: 'notify', // notify a user
 			user_id: 0, //user to notify
 			message: 'fenster offen du depp'
 		}
 	]
 
+}; // end the logic
+
+//update discovered modules with names and rooms
+var updateModules = function insertModules() {
+	$.ajax({
+		url: getConnectionUrl("/rbl/system/database/updatemodule"),
+		method: 'POST',
+		data: {
+			id: 0,
+			name : 'fenster1',
+			room : 'fablab'
+		}
+	});
+
+	$.ajax({
+		url: getConnectionUrl("/rbl/system/database/updatemodule"),
+		method: 'POST',
+		data: {
+			id: 1,
+			name : 'fenster1',
+			room : 'fablab'
+		}
+	});
+};
+
+var getModules = function getModules () {
+	$.ajax({
+		url: getConnectionUrl("/rbl/system/database/modules")
+	}).success(function (response) {
+		console.log(response);
+	});
 };
 
 $(':input').change(function () {
@@ -152,9 +170,18 @@ $('#testbtn').click(function(){
 	insertlogic();
 });
 
-showModules();
+$('#loadmodules').click(function(){
+	getModules();
+	//updateModules();
+});
+
+$('#addadmin').click(function(){
+	addNewAdminUser();
+});
+
+//showModules();
 checkDatabaseAvailable();
-addNewAdminUser();
+//addNewAdminUser();
 //getAdminUsers();
 
 setTimeout(checkDatabaseAvailable(), 10000);
