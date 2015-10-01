@@ -1,11 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
 <div class="row">
+
 	<div class="col-lg-12">
 		<h1 class="page-header">Logic</h1>
 
+	</div>
 
-		<div class="panel panel-primary">
+	<!-- Logic -->
+	<div class="col-lg-12">
+		<h1 class="page-header">Add new</h1>
+
+
+		<div class="panel panel-primary" id="logicaddpanel">
 			<div class="panel-heading">
 				<div class="input-group">
 					<span class="input-group-addon">Name</span>
@@ -23,19 +28,19 @@
 			</div>
 			<div class="col-lg-3">Execution Type:
 				<select id="exec-type">
-					<option value="IMMEDIATELY">immediately</option>
-					<option value="MINUTELY">minutely</option>
-					<option value="HOURLY">hourly</option>
-					<option value="DAILY">daily</option>
-					<option value="WEEKLY">weekly</option>
-					<option value="MONTHLY">monthly</option>
+					<option value="daily">daily</option>
+					<option value="immediately">immediately</option>
+					<option value="minutely">minutely</option>
+					<option value="hourly">hourly</option>
+					<option value="weekly">weekly</option>
+					<option value="monthly">monthly</option>
 				</select>
 			</div>
 			<div class="col-lg-3">Execution Requirement:
 				<select id="exec-req">
-					<option value="SINGLE">single</option>
-					<option value="MAJORITY">majority</option>
-					<option value="ALL">all</option>
+					<option value="single">single</option>
+					<option value="majority">majority</option>
+					<option value="all">all</option>
 				</select>
 			</div>
 			<br>
@@ -48,128 +53,50 @@
 
 				<div class="dropzone col-lg-6" id="THEN-dropzone">
 					Then
+
 				</div>
 
+			</div>
+		</div>
+
+		<ul class="nav nav-tabs">
+			<li role="presentation"><a href="#pane1" data-toggle="tab">FabLab modules</a></li>
+			<li role="presentation"><a href="#pane2" data-toggle="tab">Actions</a></li>
+		</ul>
+
+		<div class="tab-content">
+			<div id="pane1" class="tab-pane active">
+
+				<script id="fablab_modules" type="text/x-handlebars-template">​
+
+					<div class="col-lg-12">
+
+						{{#each modules}}
+
+						<div class="draggable drag-drop" id="{{id}}" data-mtype="{{type}}">
+							{{room}} :: {{name}} [ {{state}} ]
+						</div>
+
+						{{/each}}
+					</div>
+
+				</script>
+
+				<script>
+					getModules('#pane1', '#fablab_modules');
+				</script>
+
+			</div>
+			<div id="pane2" class="tab-pane">
+				<div class="draggable drag-drop" size="4" id="6">
+					<strong>SendMail</strong><br>
+					Message:
+					<div><input type="text" name="text"></div>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
-<div class="row">
-	<ul class="nav nav-tabs">
-		<li role="presentation" class="active"><a href="#pane1" data-toggle="tab">Room 1</a></li>
-		<li role="presentation"><a href="#pane2" data-toggle="tab">Room 2</a></li>
-		<li role="presentation"><a href="#pane3" data-toggle="tab">FabLab</a></li>
-	</ul>
-
-	<div class="tab-content">
-		<div id="pane1" class="tab-pane active">
-			<h4>Modules</h4>
-
-			<div class="col-lg-12">
-				<div class="draggable drag-drop" id="1" data-mtype="MODULE_OUTLET">
-					Outlet 1
-					<input id="module1-toggle" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
-						   data-offstyle="danger" data-field-id="1">
-				</div>
-				<div class="draggable drag-drop" id="2" data-mtype="MODULE_OUTLET">
-					Outlet 2
-					<input id="module2-toggle" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
-						   data-offstyle="danger" data-field-id="2">
-				</div>
-				<div class="draggable drag-drop" id="3" data-mtype="MODULE_OUTLET">
-					Outlet 3
-					<input id="module3-toggle" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
-						   data-offstyle="danger" data-field-id="3">
-				</div>
-				<div class="draggable drag-drop" id="4">
-					Temperature
-					<div id="slider-range"></div>
-					<div id="slider-range-value">Value:</div>
-				</div>
-				<div class="draggable drag-drop" id="5">
-					Temperature range
-					<div id="slider-handles"></div>
-					<div id="slider-handles-lower">Value:</div>
-					<div id="slider-handles-upper">Value:</div>
-				</div>
-				<div class="draggable drag-drop" size="4" id="6">
-					Send mail to:
-					<div><input type="email" name="email"></div>
-				</div>
-			</div>
-		</div>
-		<div id="pane2" class="tab-pane">
-			<h4>Modules</h4>
-
-			<div class="col-lg-12">
-				<div class="draggable drag-drop" id="7" data-mtype="MODULE_PIR">
-					Window Sensor
-					<input id="module1-toggle" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
-						   data-offstyle="danger" data-field-id="1">
-				</div>
-				<div class="draggable drag-drop" id="8" data-mtype="MODULE_PIR">
-					Movement Detector Alarm
-					<input id="module2-toggle" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
-						   data-offstyle="danger" data-field-id="2">
-				</div>
-				<div class="draggable drag-drop" id="9" data-mtype="MODULE_OUTLET">
-					Outlet 1
-					<input id="module3-toggle" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
-						   data-offstyle="danger" data-field-id="3">
-				</div>
-
-			</div>
-		</div>
-		<div id="pane3" class="tab-pane">
-			<h4>Modules</h4>
-		</div>
-	</div>
-	<!-- Interact JavaScript -->
-	<script src="js/plugins/interact/interact-1.1.3.min.js"></script>
-	<!-- Logic JavaScript -->
-	<script src="js/logic.js"></script>
-	<!-- Logic Parser JavaScript -->
-	<script src="js/logicparser.js"></script>
-	<!-- NoUI Slider JavaScript -->
-	<script src="js/plugins/noUiSlider/jquery.nouislider.all.min.js"></script>
-	<!-- Bootstrap Toggles JavaScript -->
-	<script src="js/plugins/toggles/bootstrap-toggle.min.js"></script>
-
-	<script> $('#slider-range').noUiSlider({
-		start: 20,
-		step: 0.1,
-		connect: "lower",
-		orientation: "horizontal",
-		range: {
-			'min': 10,
-			'max': 40
-		},
-		format: wNumb({
-			decimals: 1,
-			thousand: '.',
-			postfix: ' °C',
-		})
-	});
-	$('#slider-range').Link('lower').to($('#slider-range-value'));
-	</script>
-
-	<script> $('#slider-handles').noUiSlider({
-		start: [20, 30],
-		step: 0.1,
-		connect: true,
-		orientation: "horizontal",
-		range: {
-			'min': 10,
-			'max': 40
-		},
-		format: wNumb({
-			decimals: 1,
-			thousand: '.',
-			postfix: ' °C',
-		})
-	});
-	$('#slider-handles').Link('lower').to($('#slider-handles-lower'));
-	$('#slider-handles').Link('upper').to($('#slider-handles-upper'));
-	</script>
-</html>
+<!-- Logic stuff -->
+<script src="js/logic.js"></script>

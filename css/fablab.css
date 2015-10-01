@@ -2,3 +2,7 @@
 	font-weight: bold;
 	padding-right: 7px;
 }
+
+.module_container{
+	max-width: 350px;
+}

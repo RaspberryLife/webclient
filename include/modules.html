@@ -1,0 +1,31 @@
+<!-- Modules -->
+<div class="row">
+	<div class="col-lg-12">
+		<h2 class="page-header">Modules</h2>
+
+		<div id="module_container">
+
+			<script id="fablab_modules" type="text/x-handlebars-template">​
+
+				<ul class="list-group">
+
+					{{#each modules}}
+
+					<li class="list-group-item">
+						{{name}}
+						<span class="badge">id: {{id}}</span>
+						<span class="badge">{{state}}</span>
+						<span class="badge">{{type}}</span>
+					</li>
+
+					{{/each}}
+				</ul>
+
+			</script>
+			<script>
+				getModules('#module_container','#fablab_modules');
+			</script>
+
+		</div>
+	</div>
+</div>
