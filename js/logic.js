@@ -98,7 +98,7 @@ interact('.dropzone').dropzone({
 $(function () {
 	$(':input').change(function () {
 		console.log(this.id + " Toggle: " + $(this).prop('checked'));
-	})
+	});
 });
 
 $('#slider-handles').noUiSlider({
@@ -147,20 +147,16 @@ $('#save-logic').click(function(){
 	var actions = [];
 	$.each(ifs, function(key, value){
 		triggers.push({
-			module : {
-				id : value.id
-			},
-			condition : {
-				fieldId : 1, // id of the field that is watched
-				state : true // window open
-			}
+			triggerModuleId : value.id,
+			triggerFieldId : 1, // id of the field that is watched
+			triggerState : true // window open
 		});
 	});
 	$.each(thens, function(key, value){
 		actions.push({
-			type: 'notify', // notify a user
-			user_id: 0, //user to notify
-			message: 'fenster offen du depp'
+			actionType: 'notify', // notify a user
+			actionUserId: 0, //user to notify
+			actionMessage: 'fenster offen du depp'
 		});
 	});
 
@@ -171,25 +167,22 @@ $('#save-logic').click(function(){
 
 var getLogicMessage = function getLogicMessage(name, exectype, execreq, triggers, actions) {
 	return {
-		name : name,
+		logicName : name,
 
-		// frequency of checking for status
-		executionFrequency : {
-			type : exectype, // immediately, minutely, hourly, daily, weekly, monthly
-			minute : 50,
-			hour : 17,
-			day : 0,
-			week : 0
-		},
+		execType : exectype, // immediately, minutely, hourly, daily, weekly, monthly
+		execMinute : 50,
+		execHour : 17,
+		execDay : 0,
+		execWeek : 0,
 
 		// single / majority / all
-		executionRequirement : execreq,
+		execRequirement : execreq,
 
 		//Array of triggers
-		triggers : triggers,
+		logicTriggers : triggers,
 
 		//array of actions to execute
-		actions : actions
+		logicActions : actions
 	};
 };
 
