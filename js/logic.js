@@ -139,7 +139,7 @@ $('#slider-range').Link('lower').to($('#slider-range-value'));
 
 $('#save-logic').click(function(){
 	var name = $('#logic-name').val();
-	var exectype = $('#exec-type').val();
+	var execfreq = $('#exec-type').val();
 	var execreq = $('#exec-req').val();
 	var ifs = $('#IF-dropzone').find('.drag-drop');
 	var thens = $('#THEN-dropzone').find('.drag-drop');
@@ -160,16 +160,16 @@ $('#save-logic').click(function(){
 		});
 	});
 
-	var logic = getLogicMessage(name, exectype, execreq, triggers, actions);
+	var logic = getLogicMessage(name, execfreq, execreq, triggers, actions);
 	console.log(logic);
 	insertlogic(logic);
 });
 
-var getLogicMessage = function getLogicMessage(name, exectype, execreq, triggers, actions) {
+var getLogicMessage = function getLogicMessage(name, execfreq, execreq, triggers, actions) {
 	return {
 		logicName : name,
 
-		execType : exectype, // immediately, minutely, hourly, daily, weekly, monthly
+		execFrequency : execfreq, // immediately, minutely, hourly, daily, weekly, monthly
 		execMinute : 50,
 		execHour : 17,
 		execDay : 0,
@@ -187,15 +187,12 @@ var getLogicMessage = function getLogicMessage(name, exectype, execreq, triggers
 };
 
 var insertlogic = function insertlogic(logic){
-	console.log(logic);
 	$.ajax({
 		url: getConnectionUrl("/rbl/system/database/logic"),
 		method: 'POST',
 		data: {
 			logic : JSON.stringify(logic)
 		}
-	}).success(function (response) {
-		console.log(response);
 	});
 };
 
